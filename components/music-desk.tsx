@@ -33,7 +33,7 @@ type CustomSong = Pick<Song, "id" | "title" | "artist" | "cover" | "duration" | 
 const emptyLinks: SongLinks = {}
 
 export function MusicDesk() {
-  const [overrides, setOverrides, ready] = usePersistentState<LinkMap>(
+  const [overrides, setOverrides] = usePersistentState<LinkMap>(
     KEYS.songLinks,
     {}
   )
@@ -117,14 +117,6 @@ export function MusicDesk() {
       return next
     })
     toast.success("Removed from this browser.")
-  }
-
-  if (!ready) {
-    return (
-      <div className="mx-auto max-w-5xl px-4 py-16 text-sm text-white/50">
-        Loading the catalog…
-      </div>
-    )
   }
 
   return (

@@ -59,8 +59,7 @@ export function PayDesk() {
 }
 
 function BagCheckout() {
-  const { items, total, setQty, remove, clear, ready } = useCart()
-  if (!ready) return <p className="py-8 text-sm text-white/50">Loading bag…</p>
+  const { items, total, setQty, remove, clear } = useCart()
   if (items.length === 0) {
     return (
       <Empty

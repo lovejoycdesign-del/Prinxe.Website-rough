@@ -30,8 +30,8 @@ const replies = [
 ]
 
 export function FanInbox() {
-  const [name, setName, nameReady] = usePersistentState(KEYS.fanName, "")
-  const [messages, setMessages, ready] = usePersistentState<Msg[]>(KEYS.inbox, [
+  const [name, setName] = usePersistentState(KEYS.fanName, "")
+  const [messages, setMessages] = usePersistentState<Msg[]>(KEYS.inbox, [
     welcome,
   ])
   const [draft, setDraft] = useState("")
@@ -74,14 +74,6 @@ export function FanInbox() {
       setSending(false)
       toast.success("DAPRINXE replied.")
     }, 900)
-  }
-
-  if (!ready || !nameReady) {
-    return (
-      <div className="mx-auto max-w-2xl px-4 py-16 text-sm text-white/50">
-        Opening the inbox…
-      </div>
-    )
   }
 
   return (

@@ -32,7 +32,7 @@ function extractId(input: string) {
 }
 
 export function VideoStage() {
-  const [extras, setExtras, ready] = usePersistentState<ExtraVideo[]>(
+  const [extras, setExtras] = usePersistentState<ExtraVideo[]>(
     KEYS.videoLinks,
     []
   )
@@ -80,10 +80,7 @@ export function VideoStage() {
 
   return (
     <div className="mx-auto max-w-[1400px] px-4 py-12 sm:px-6">
-      {!ready ? (
-        <p className="text-sm text-white/50">Loading the reel…</p>
-      ) : (
-        <div className="grid gap-10 lg:grid-cols-[1.5fr_0.9fr]">
+      <div className="grid gap-10 lg:grid-cols-[1.5fr_0.9fr]">
           <div>
             {active.youtubeId ? (
               <div className="aspect-video overflow-hidden bg-black ring-1 ring-white/10">
@@ -206,7 +203,6 @@ export function VideoStage() {
             </form>
           </aside>
         </div>
-      )}
     </div>
   )
 }
