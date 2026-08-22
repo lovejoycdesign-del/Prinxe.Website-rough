@@ -22,7 +22,7 @@ export function PageBand({
           {title}
         </h1>
         {copy ? (
-          <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/65 sm:text-base">
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/65 sm:text-base">
             {copy}
           </p>
         ) : null}

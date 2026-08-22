@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { toast } from "sonner"
-import { bookingOffers, money } from "@/lib/data"
+import { bookingOffers, cashApp, money } from "@/lib/data"
 import { useCart } from "@/hooks/use-cart"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -21,8 +21,10 @@ export function PayDesk() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+      <CashAppPay />
       <p className="mb-6 text-xs text-white/45">
-        Demo checkout. Use it to walk the flow — no card is processed.
+        Merch and booking deposits below are a demo till — no card is processed.
+        Real tips go through Cash App.
       </p>
       <Tabs defaultValue={defaultTab}>
         <TabsList className="h-auto w-full flex-wrap rounded-none bg-white/5 p-1">
@@ -46,6 +48,54 @@ export function PayDesk() {
           <DepositCheckout />
         </TabsContent>
       </Tabs>
+    </div>
+  )
+}
+
+function CashAppPay() {
+  return (
+    <div className="mb-10 grid gap-6 border border-white bg-white p-6 text-black sm:grid-cols-[auto_1fr] sm:items-center">
+      <a
+        href={cashApp.url}
+        target="_blank"
+        rel="noreferrer"
+        className="mx-auto block shrink-0"
+        aria-label={`Open Cash App ${cashApp.tag}`}
+      >
+        <Image
+          src={cashApp.qrSrc}
+          alt={`Cash App QR code for ${cashApp.tag}`}
+          width={220}
+          height={220}
+          className="size-[200px] sm:size-[220px]"
+          priority
+        />
+      </a>
+      <div className="text-center sm:text-left">
+        <p className="text-[11px] font-semibold tracking-[0.28em] text-black/45">
+          CASH APP
+        </p>
+        <a
+          href={cashApp.url}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-2 inline-block font-display text-4xl tracking-[0.08em] text-black hover:text-brand sm:text-5xl"
+        >
+          {cashApp.tag}
+        </a>
+        <p className="mt-3 text-sm leading-6 text-black/70">
+          Scan the code or tap the tag. That is the live link for tips,
+          donations, and anything you want to put in the bag.
+        </p>
+        <a
+          href={cashApp.url}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-5 inline-flex h-11 items-center justify-center bg-black px-5 text-[11px] font-semibold tracking-[0.2em] text-white transition-colors hover:bg-brand"
+        >
+          OPEN CASH APP
+        </a>
+      </div>
     </div>
   )
 }
@@ -128,8 +178,16 @@ function TipCheckout() {
   return (
     <div className="panel p-5">
       <p className="text-sm text-white/60">
-        Fuel the next video. Every tip is a thank-you, not a transaction with
-        strings.
+        Prefer a number first? Pick an amount here, then send it on Cash App at{" "}
+        <a
+          href={cashApp.url}
+          target="_blank"
+          rel="noreferrer"
+          className="text-white underline underline-offset-4"
+        >
+          {cashApp.tag}
+        </a>
+        . Every tip is a thank-you, not a transaction with strings.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         {tips.map((n) => (

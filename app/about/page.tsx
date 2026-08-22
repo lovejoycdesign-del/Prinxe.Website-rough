@@ -22,7 +22,7 @@ export default function AboutPage() {
             {artist.tagline}
           </p>
           <p>
-            DAPRINXE writes what he lives. The nights with no heat. The rooms
+            DA PRINXE writes what he lives. The nights with no heat. The rooms
             that went quiet. The people who stayed when the money was theoretical.
             The music sits between street anthems and melody — records that hit
             your chest first and explain themselves later.

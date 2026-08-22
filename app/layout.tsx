@@ -24,11 +24,11 @@ const allura = Allura({
 
 export const metadata: Metadata = {
   title: {
-    default: "DAPRINXE — Pain Made Me. Loyalty Keeps Me.",
-    template: "%s · DAPRINXE",
+    default: "DA PRINXE — Pain Made Me. Loyalty Keeps Me.",
+    template: "%s · DA PRINXE",
   },
   description:
-    "Official site for DAPRINXE. Stream Crazy, shop merch, and reach the artist or manager.",
+    "Official site for DA PRINXE. Stream Crazy, shop merch, and reach the artist or manager.",
   icons: { icon: "/favicon.svg" },
 }
 

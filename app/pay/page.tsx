@@ -4,8 +4,9 @@ import { PageBand } from "@/components/page-band"
 import { PayDesk } from "@/components/pay-desk"
 
 export const metadata: Metadata = {
-  title: "Pay",
-  description: "Checkout merch, send a tip, or drop a booking deposit. Demo payments — no live charges.",
+  title: "Payment",
+  description:
+    "Tip DA PRINXE on Cash App at $legenddakidd. Every donation helps him build the brand.",
 }
 
 export default function PayPage() {
@@ -13,8 +14,8 @@ export default function PayPage() {
     <div>
       <PageBand
         kicker="THE BAG"
-        title="PAY"
-        copy="Merch checkout, tips, tickets, and booking deposits. This is a demo till — nothing is charged."
+        title="PAYMENT"
+        copy="Every tip, donation, and dollar of support means something while DA PRINXE builds this brand from the ground up. He does not take that lightly. The love goes both ways — the same respect he shows his community is the reason he keeps showing up, writing what he lives, and putting the city on the record. Scan the Cash App code or send it straight to $legenddakidd."
       />
       <Suspense
         fallback={

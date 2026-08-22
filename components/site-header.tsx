@@ -30,7 +30,7 @@ export function SiteHeader() {
           {artist.name}
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex">
+        <nav className="hidden items-center gap-4 xl:gap-6 lg:flex">
           {nav.map((item) => (
             <Link
               key={item.href}

@@ -1,6 +1,6 @@
-# DAPRINXE
+# DA PRINXE
 
-Official site for the hip-hop artist **DAPRINXE** — dark, cinematic, and built for the Real Ones.
+Official site for the hip-hop artist **DA PRINXE** — dark, cinematic, and built for the Real Ones.
 
 The homepage follows the artist preview: distressed wordmark, blood-red CTAs, *Crazy* and *Billie Jean* out now, plus merch, contact, and the join list. Videos is the next page after Home and embeds the official *Crazy* visual.
 
@@ -14,13 +14,13 @@ The homepage follows the artist preview: distressed wordmark, blood-red CTAs, *C
 | `/merch` | Store. Hoodie, tee, cap, shorts. |
 | `/contact` | Artist (empty) and manager LJ Chirombo. |
 | `/about` | Artist story |
-| `/pay` | Demo checkout — merch, tips, tickets, booking deposits |
+| `/pay` | Payment / The Bag — Cash App `$legenddakidd` QR, plus a demo merch till |
 | `/inbox` | Fan DMs |
 | `/join` | Real Ones list |
 | `/book` | Shows, features, sessions |
 | `/press` | One-sheet / EPK |
 
-Song links, extra videos, the bag, and fan messages save in **this browser** (`localStorage`). Nothing is charged on `/pay` — it is a walkthrough till until a real processor is wired in.
+Song links, extra videos, the bag, and fan messages save in **this browser** (`localStorage`). Tips on `/pay` go to Cash App at [$legenddakidd](https://cash.app/$legenddakidd). Merch and booking deposits on that page are still a walkthrough till.
 
 ## Run locally
 

@@ -56,7 +56,7 @@ export const platforms: { key: PlatformKey; label: string }[] = [
 ]
 
 export const artist = {
-  name: "DAPRINXE",
+  name: "DA PRINXE",
   short: "Da Prinxe",
   kicker: "TWO SIDES. ONE STORY.",
   tagline: "PAIN MADE ME. LOYALTY KEEPS ME.",
@@ -93,15 +93,21 @@ export const nav = [
   { href: "/merch", label: "MERCH" },
   { href: "/contact", label: "CONTACT" },
   { href: "/about", label: "ABOUT" },
+  { href: "/pay", label: "PAYMENT" },
 ]
 
 export const extraNav = [
   { href: "/inbox", label: "FAN DM" },
-  { href: "/pay", label: "PAY" },
   { href: "/book", label: "BOOK" },
   { href: "/press", label: "PRESS" },
   { href: "/join", label: "JOIN" },
 ]
+
+export const cashApp = {
+  tag: "$legenddakidd",
+  url: "https://cash.app/$legenddakidd",
+  qrSrc: "/images/cashapp-qr.png",
+}
 
 export const songs: Song[] = [
   {
