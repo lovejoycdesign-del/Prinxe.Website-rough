@@ -1,21 +1,12 @@
 import type { Metadata } from "next"
-import Image from "next/image"
 import Link from "next/link"
 import { artist } from "@/lib/data"
 import { PageBand } from "@/components/page-band"
 
 export const metadata: Metadata = {
   title: "Press",
-  description: "Electronic press kit for DA PRINXE — bio, facts, assets, and contacts.",
+  description: "Electronic press kit for DA PRINXE — bio, facts, and contacts.",
 }
-
-const assets = [
-  ["/images/cover-crazy-cell.png", "Crazy cover"],
-  ["/images/cover-distant-lover-v2.png", "Distant Lover cover"],
-  ["/images/cover-billie-jean-v2.png", "Billie Jean cover"],
-  ["/images/cover-pain-names-v2.png", "Pain Names cover"],
-  ["/images/city-skyline.png", "City still"],
-] as const
 
 export default function PressPage() {
   return (
@@ -54,20 +45,6 @@ export default function PressPage() {
               </div>
             ))}
           </dl>
-        </section>
-
-        <section>
-          <h2 className="font-display text-3xl tracking-[0.1em]">ASSETS</h2>
-          <div className="mt-4 grid gap-3 sm:grid-cols-3">
-            {assets.map(([src, label]) => (
-              <a key={label} href={src} download className="panel overflow-hidden">
-                <Image src={src} alt={label} width={360} height={240} className="h-40 w-full object-cover" />
-                <p className="p-2 text-[11px] tracking-[0.14em] text-white/60">
-                  DOWNLOAD · {label}
-                </p>
-              </a>
-            ))}
-          </div>
         </section>
 
         <div className="flex flex-wrap gap-3">
