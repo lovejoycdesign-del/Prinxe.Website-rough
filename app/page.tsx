@@ -28,7 +28,7 @@ export default function HomePage() {
             alt=""
             fill
             priority
-            className="object-cover object-[center_20%]"
+            className="object-cover object-[center_12%]"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black" />
           <div className="absolute inset-0 bg-brand/10 mix-blend-multiply" />
@@ -39,7 +39,7 @@ export default function HomePage() {
             alt="DAPRINXE"
             fill
             priority
-            className="object-cover object-[center_18%]"
+            className="object-cover object-[center_10%]"
           />
           <div className="absolute inset-0 bg-gradient-to-l from-transparent via-black/20 to-black" />
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" />
