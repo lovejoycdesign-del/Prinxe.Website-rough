@@ -99,7 +99,6 @@ export const nav = [
 export const extraNav = [
   { href: "/inbox", label: "FAN DM" },
   { href: "/book", label: "BOOK" },
-  { href: "/press", label: "PRESS" },
   { href: "/join", label: "JOIN" },
 ]
 

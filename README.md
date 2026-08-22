@@ -18,7 +18,6 @@ The homepage follows the artist preview: distressed wordmark, blood-red CTAs, *C
 | `/inbox` | Fan DMs |
 | `/join` | Real Ones list |
 | `/book` | Shows, features, sessions |
-| `/press` | One-sheet / EPK |
 
 Song links, extra videos, the bag, and fan messages save in **this browser** (`localStorage`). Tips on `/pay` go to Cash App at [$legenddakidd](https://cash.app/$legenddakidd). Merch and booking deposits on that page are still a walkthrough till.
 
