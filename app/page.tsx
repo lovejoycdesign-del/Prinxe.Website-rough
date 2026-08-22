@@ -21,30 +21,8 @@ export default function HomePage() {
           priority
           className="object-cover opacity-40"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-black/40" />
-        <div className="absolute inset-x-0 top-16 h-72 opacity-70 md:hidden">
-          <Image
-            src="/images/hero-artist.png"
-            alt=""
-            fill
-            priority
-            className="object-cover object-[center_22%]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black" />
-          <div className="absolute inset-0 bg-brand/10 mix-blend-multiply" />
-        </div>
-        <div className="absolute inset-y-0 right-0 hidden w-[52%] md:block">
-          <Image
-            src="/images/hero-artist.png"
-            alt="DAPRINXE"
-            fill
-            priority
-            className="object-cover object-[center_20%]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-black/20 to-black" />
-          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" />
-          <div className="absolute inset-0 bg-brand/10 mix-blend-multiply" />
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/50" />
+        <div className="absolute inset-0 bg-brand/10 mix-blend-multiply" />
 
         <div className="relative mx-auto grid min-h-[92vh] max-w-[1400px] items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_auto]">
           <div className="max-w-xl">

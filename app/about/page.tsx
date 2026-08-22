@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Image from "next/image"
 import Link from "next/link"
 import { artist } from "@/lib/data"
 import { PageBand } from "@/components/page-band"
@@ -17,15 +16,7 @@ export default function AboutPage() {
         title="ABOUT"
         copy="Pain made the records. Loyalty kept the circle small. This is the short version."
       />
-      <div className="mx-auto grid max-w-5xl gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-        <div className="relative aspect-[3/4] overflow-hidden ring-1 ring-white/10">
-          <Image
-            src="/images/hero-artist.png"
-            alt="DAPRINXE"
-            fill
-            className="object-cover object-top"
-          />
-        </div>
+      <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
         <div className="space-y-6 text-sm leading-7 text-white/70">
           <p className="font-display text-4xl tracking-[0.08em] text-white">
             {artist.tagline}
