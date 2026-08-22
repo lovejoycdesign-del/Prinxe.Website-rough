@@ -78,7 +78,6 @@ export const artist = {
       href: "https://instagram.com/da._prinxe",
       key: "instagram",
     },
-    { label: "TikTok", href: "https://www.tiktok.com/@daprinxe", key: "tiktok" },
     {
       label: "YouTube",
       href: "https://www.youtube.com/watch?v=_nTcWe1VNBk",

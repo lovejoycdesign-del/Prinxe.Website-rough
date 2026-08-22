@@ -12,14 +12,6 @@ export function InstagramIcon({ className }: IconProps) {
   )
 }
 
-export function TikTokIcon({ className }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={cn("size-4", className)} fill="currentColor">
-      <path d="M14.2 3h2.1c.2 1.8 1.4 3.2 3.2 3.6v2.1c-1.2 0-2.3-.4-3.2-1v6.4c0 3.3-2.7 5.9-6.1 5.9S4.1 17.4 4.1 14.1c0-3 2.2-5.5 5.1-5.9v2.3c-1.6.3-2.8 1.8-2.8 3.6 0 2 1.6 3.6 3.6 3.6s3.6-1.6 3.6-3.6V3z" />
-    </svg>
-  )
-}
-
 export function YouTubeIcon({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={cn("size-4", className)} fill="currentColor">
@@ -62,7 +54,6 @@ export function TidalIcon({ className }: IconProps) {
 
 export const socialIcons = {
   instagram: InstagramIcon,
-  tiktok: TikTokIcon,
   youtube: YouTubeIcon,
   spotify: SpotifyIcon,
 }
