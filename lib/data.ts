@@ -1,0 +1,360 @@
+export type PlatformKey =
+  | "spotify"
+  | "apple"
+  | "youtube"
+  | "soundcloud"
+  | "tidal";
+
+export type SongLinks = Partial<Record<PlatformKey, string>>;
+
+export type Song = {
+  id: string
+  title: string
+  artist: string
+  cover: string
+  featured?: boolean
+  scriptColor?: "blue" | "red"
+  duration: string
+  year: string
+  links: SongLinks
+}
+
+export type Video = {
+  id: string
+  title: string
+  director?: string
+  cover: string
+  youtubeId?: string
+  featured?: boolean
+  status: "live" | "soon"
+}
+
+export type MerchItem = {
+  slug: string
+  title: string
+  price: number
+  image: string
+  tag: string
+  description: string
+  sizes: string[]
+}
+
+export type Show = {
+  id: string
+  date: string
+  city: string
+  venue: string
+  status: "on-sale" | "sold-out" | "soon"
+  ticketUrl?: string
+}
+
+export const platforms: { key: PlatformKey; label: string }[] = [
+  { key: "spotify", label: "Spotify" },
+  { key: "apple", label: "Apple Music" },
+  { key: "youtube", label: "YouTube" },
+  { key: "soundcloud", label: "SoundCloud" },
+  { key: "tidal", label: "Tidal" },
+]
+
+export const artist = {
+  name: "DAPRINXE",
+  short: "Da Prinxe",
+  kicker: "TWO SIDES. ONE STORY.",
+  tagline: "PAIN MADE ME. LOYALTY KEEPS ME.",
+  blurb:
+    "Raw stories. Real emotions. Street anthems & melodies that hit your soul.",
+  quote: "I WRITE WHAT I LIVE...",
+  location: "The city that raised him. The stages that keep him honest.",
+  email: "booking@daprinxe.com",
+  pressEmail: "press@daprinxe.com",
+  stats: [
+    { value: "1M+", label: "STREAMS" },
+    { value: "20+", label: "COUNTRIES" },
+    { value: "100K+", label: "FOLLOWERS" },
+  ],
+  socials: [
+    {
+      label: "Instagram",
+      href: "https://instagram.com/daprinxe",
+      key: "instagram",
+    },
+    { label: "TikTok", href: "https://www.tiktok.com/@daprinxe", key: "tiktok" },
+    {
+      label: "YouTube",
+      href: "https://www.youtube.com/watch?v=_nTcWe1VNBk",
+      key: "youtube",
+    },
+    {
+      label: "Spotify",
+      href: "https://open.spotify.com/artist/4pajbF6YIwwAY7ryqk2e0P",
+      key: "spotify",
+    },
+  ],
+}
+
+export const nav = [
+  { href: "/", label: "HOME" },
+  { href: "/videos", label: "VIDEOS" },
+  { href: "/music", label: "MUSIC" },
+  { href: "/merch", label: "MERCH" },
+  { href: "/tour", label: "TOUR" },
+  { href: "/about", label: "ABOUT" },
+]
+
+export const extraNav = [
+  { href: "/inbox", label: "FAN DM" },
+  { href: "/contact", label: "CONTACT" },
+  { href: "/pay", label: "PAY" },
+  { href: "/book", label: "BOOK" },
+  { href: "/press", label: "PRESS" },
+  { href: "/join", label: "JOIN" },
+]
+
+export const songs: Song[] = [
+  {
+    id: "billie-jean",
+    title: "BILLIE JEAN",
+    artist: "DAPRINXE",
+    cover: "/images/cover-billie-jean.png",
+    featured: true,
+    scriptColor: "blue",
+    duration: "2:48",
+    year: "2026",
+    links: {},
+  },
+  {
+    id: "crazy",
+    title: "CRAZY",
+    artist: "DAPRINXE",
+    cover: "/images/cover-crazy.png",
+    featured: true,
+    scriptColor: "red",
+    duration: "2:36",
+    year: "2026",
+    links: {
+      youtube: "https://www.youtube.com/watch?v=_nTcWe1VNBk",
+    },
+  },
+  {
+    id: "pain-names",
+    title: "PAIN NAMES",
+    artist: "DAPRINXE",
+    cover: "/images/cover-pain-names.png",
+    duration: "3:02",
+    year: "2026",
+    links: {},
+  },
+  {
+    id: "story-of-my-life",
+    title: "STORY OF MY LIFE",
+    artist: "DAPRINXE",
+    cover: "/images/cover-billie-jean.png",
+    duration: "2:37",
+    year: "2023",
+    links: {},
+  },
+  {
+    id: "pain-in-my-eyes",
+    title: "PAIN IN MY EYES",
+    artist: "DAPRINXE ft. Yung Khris",
+    cover: "/images/cover-pain-names.png",
+    duration: "2:21",
+    year: "2024",
+    links: {},
+  },
+  {
+    id: "distant-lover",
+    title: "DISTANT LOVER",
+    artist: "DAPRINXE",
+    cover: "/images/cover-crazy.png",
+    duration: "2:15",
+    year: "2023",
+    links: {},
+  },
+]
+
+export const videos: Video[] = [
+  {
+    id: "crazy",
+    title: "CRAZY",
+    director: "dir. @whosmyree",
+    cover: "/images/video-crazy-yt.jpg",
+    youtubeId: "_nTcWe1VNBk",
+    featured: true,
+    status: "live",
+  },
+  {
+    id: "billie-jean",
+    title: "BILLIE JEAN",
+    director: "Official Video",
+    cover: "/images/cover-billie-jean.png",
+    status: "soon",
+  },
+  {
+    id: "pain-names",
+    title: "PAIN NAMES",
+    director: "Visual",
+    cover: "/images/cover-pain-names.png",
+    status: "soon",
+  },
+  {
+    id: "bts-real-ones",
+    title: "REAL ONES BTS",
+    director: "Behind the scenes",
+    cover: "/images/video-room.png",
+    status: "soon",
+  },
+]
+
+export const merch: MerchItem[] = [
+  {
+    slug: "real-ones-hoodie",
+    title: "REAL ONES HOODIE",
+    price: 65,
+    image: "/images/merch-hoodie.png",
+    tag: "CORE DROP",
+    description:
+      "Heavyweight black fleece. Distressed DAPRINXE mark on the chest. Built for late nights, long drives, and the people who stayed.",
+    sizes: ["S", "M", "L", "XL", "2XL"],
+  },
+  {
+    slug: "stencil-tee",
+    title: "STENCIL TEE",
+    price: 35,
+    image: "/images/merch-tee.png",
+    tag: "ESSENTIAL",
+    description:
+      "Oversized black tee with the white stencil wordmark. Soft wash, street cut, Real Ones tag on the hem.",
+    sizes: ["S", "M", "L", "XL", "2XL"],
+  },
+  {
+    slug: "fitted-cap",
+    title: "FITTED CAP",
+    price: 30,
+    image: "/images/merch-cap.png",
+    tag: "NEW",
+    description:
+      "Black fitted cap, embroidered DAPRINXE front, red flash under the brim. Keep it low.",
+    sizes: ["S/M", "L/XL"],
+  },
+  {
+    slug: "nameplate-chain",
+    title: "NAMEPLATE CHAIN",
+    price: 85,
+    image: "/images/merch-chain.png",
+    tag: "LIMITED",
+    description:
+      "Silver-tone Cuban with a DAPRINXE nameplate. The same weight he wears in the visuals.",
+    sizes: ["20\"", "22\"", "24\""],
+  },
+]
+
+export const shows: Show[] = [
+  {
+    id: "la",
+    date: "SEP 15",
+    city: "Los Angeles, CA",
+    venue: "The Observatory",
+    status: "on-sale",
+    ticketUrl: "/pay?intent=tickets&show=la",
+  },
+  {
+    id: "hou",
+    date: "SEP 22",
+    city: "Houston, TX",
+    venue: "House of Blues",
+    status: "on-sale",
+    ticketUrl: "/pay?intent=tickets&show=hou",
+  },
+  {
+    id: "nyc",
+    date: "SEP 29",
+    city: "New York, NY",
+    venue: "Webster Hall",
+    status: "on-sale",
+    ticketUrl: "/pay?intent=tickets&show=nyc",
+  },
+  {
+    id: "sf",
+    date: "OCT 06",
+    city: "San Francisco, CA",
+    venue: "The Fillmore",
+    status: "on-sale",
+    ticketUrl: "/pay?intent=tickets&show=sf",
+  },
+  {
+    id: "chi",
+    date: "OCT 13",
+    city: "Chicago, IL",
+    venue: "House of Blues",
+    status: "soon",
+  },
+  {
+    id: "atl",
+    date: "OCT 20",
+    city: "Atlanta, GA",
+    venue: "The Tabernacle",
+    status: "soon",
+  },
+  {
+    id: "mia",
+    date: "NOV 03",
+    city: "Miami, FL",
+    venue: "The Ground",
+    status: "on-sale",
+    ticketUrl: "/pay?intent=tickets&show=mia",
+  },
+  {
+    id: "dal",
+    date: "NOV 10",
+    city: "Dallas, TX",
+    venue: "The Factory",
+    status: "sold-out",
+  },
+]
+
+export const bookingOffers = [
+  {
+    id: "show",
+    title: "LIVE SHOW",
+    price: "From $2,500",
+    deposit: 500,
+    copy: "Clubs, colleges, private rooms. Full set or stripped set. Travel billed separate.",
+  },
+  {
+    id: "feature",
+    title: "FEATURE VERSE",
+    price: "From $400",
+    deposit: 150,
+    copy: "16 or 24. Melody or straight bar. Turnaround in 7 days once the beat is locked.",
+  },
+  {
+    id: "collab",
+    title: "COLLAB SESSION",
+    price: "From $800",
+    deposit: 250,
+    copy: "In-studio or remote. Song, hook, and mix notes. You leave with a record, not a vibe.",
+  },
+  {
+    id: "brand",
+    title: "BRAND / CONTENT",
+    price: "Custom",
+    deposit: 300,
+    copy: "Looks, UGC, campaign verses. If it fits the world, we talk numbers.",
+  },
+]
+
+export function money(n: number) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(n)
+}
+
+export function youtubeWatch(id: string) {
+  return `https://www.youtube.com/watch?v=${id}`
+}
+
+export function youtubeEmbed(id: string) {
+  return `https://www.youtube.com/embed/${id}`
+}
