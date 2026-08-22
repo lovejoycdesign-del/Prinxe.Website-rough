@@ -11,7 +11,7 @@ The homepage follows the artist preview: distressed wordmark, blood-red CTAs, *C
 | `/` | Homepage |
 | `/videos` | Music videos. *Crazy* is live. Add more YouTube links in the browser. |
 | `/music` | Catalog. Add songs and paste Spotify / Apple / YouTube / SoundCloud / Tidal URLs. |
-| `/merch` | Store. Hoodie, tee, cap, nameplate chain. |
+| `/merch` | Store. Hoodie, tee, cap, shorts. |
 | `/tour` | Upcoming dates and tickets. |
 | `/about` | Artist story |
 | `/contact` | Bookings and press |
