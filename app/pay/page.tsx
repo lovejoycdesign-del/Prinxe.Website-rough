@@ -15,7 +15,7 @@ export default function PayPage() {
       <PageBand
         kicker="THE BAG"
         title="PAYMENT"
-        copy="Every tip, donation, and dollar of support means something while DA PRINXE builds this brand from the ground up. He does not take that lightly. The love goes both ways — the same respect he shows his community is the reason he keeps showing up, writing what he lives, and putting the city on the record. Scan the Cash App code or send it straight to $legenddakidd."
+        copy="Every tip, donation, and dollar of support means something while DA PRINXE builds this brand from the ground up. He does not take that lightly. The love goes both ways — the same respect he shows his community is the reason he keeps showing up, writing what he lives, and putting the city on the record."
       />
       <Suspense
         fallback={
