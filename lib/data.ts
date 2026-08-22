@@ -75,7 +75,7 @@ export const artist = {
   socials: [
     {
       label: "Instagram",
-      href: "https://instagram.com/daprinxe",
+      href: "https://instagram.com/da._prinxe",
       key: "instagram",
     },
     { label: "TikTok", href: "https://www.tiktok.com/@daprinxe", key: "tiktok" },
