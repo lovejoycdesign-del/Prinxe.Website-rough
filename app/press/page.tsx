@@ -63,7 +63,7 @@ export default function PressPage() {
             {[
               ["/images/hero-artist.png", "Portrait"],
               ["/images/video-crazy-yt.jpg", "Crazy still"],
-              ["/images/cover-crazy.png", "Crazy cover"],
+              ["/images/cover-crazy-cell.png", "Crazy cover"],
             ].map(([src, label]) => (
               <a key={label} href={src} download className="panel overflow-hidden">
                 <Image src={src} alt={label} width={360} height={240} className="h-40 w-full object-cover" />

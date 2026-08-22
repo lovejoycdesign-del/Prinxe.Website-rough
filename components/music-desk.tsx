@@ -96,7 +96,7 @@ export function MusicDesk() {
         id,
         title: newTitle.trim().toUpperCase(),
         artist: newArtist.trim() || "DAPRINXE",
-        cover: "/images/cover-crazy.png",
+        cover: "/images/cover-crazy-cell.png",
         duration: "—",
         year: String(new Date().getFullYear()),
       },
