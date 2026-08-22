@@ -63,15 +63,10 @@ export const artist = {
   tagline: "PAIN MADE ME. LOYALTY KEEPS ME.",
   blurb:
     "Raw stories. Real emotions. Street anthems & melodies that hit your soul.",
-  quote: "I WRITE WHAT I LIVE...",
+  quote: "I write what I live.",
   location: "The city that raised him. The stages that keep him honest.",
   email: "booking@daprinxe.com",
   pressEmail: "press@daprinxe.com",
-  stats: [
-    { value: "1M+", label: "STREAMS" },
-    { value: "20+", label: "COUNTRIES" },
-    { value: "100K+", label: "FOLLOWERS" },
-  ],
   socials: [
     {
       label: "Instagram",
@@ -208,8 +203,8 @@ export const videos: Video[] = [
 export const merch: MerchItem[] = [
   {
     slug: "real-ones-hoodie",
-    title: "REAL ONES HOODIE",
-    price: 65,
+    title: "HOODIE",
+    price: 80,
     image: "/images/merch-hoodie.png",
     tag: "CORE DROP",
     description:
@@ -218,8 +213,8 @@ export const merch: MerchItem[] = [
   },
   {
     slug: "stencil-tee",
-    title: "STENCIL TEE",
-    price: 35,
+    title: "T-SHIRT",
+    price: 50,
     image: "/images/merch-tee.png",
     tag: "ESSENTIAL",
     description:
@@ -228,8 +223,8 @@ export const merch: MerchItem[] = [
   },
   {
     slug: "fitted-cap",
-    title: "FITTED CAP",
-    price: 30,
+    title: "HAT",
+    price: 40,
     image: "/images/merch-cap.png",
     tag: "NEW",
     description:
@@ -238,7 +233,7 @@ export const merch: MerchItem[] = [
   },
   {
     slug: "real-ones-shorts",
-    title: "REAL ONES SHORTS",
+    title: "SHORTS",
     price: 45,
     image: "/images/merch-shorts.png",
     tag: "NEW DROP",

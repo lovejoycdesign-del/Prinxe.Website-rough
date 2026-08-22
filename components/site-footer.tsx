@@ -3,12 +3,9 @@
 import Link from "next/link"
 import { useState } from "react"
 import { toast } from "sonner"
-import { Globe, Headphones, Users } from "lucide-react"
 import { artist, extraNav, nav } from "@/lib/data"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-
-const statIcons = [Headphones, Globe, Users]
 
 export function SiteFooter() {
   const [email, setEmail] = useState("")
@@ -30,29 +27,14 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-white/10 bg-black">
-      <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.1fr_1.4fr_1fr] lg:items-center">
+      <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.2fr_1fr] lg:items-center">
         <div>
           <p className="font-display text-6xl leading-none tracking-[0.08em] text-brand/35 sm:text-7xl">
             {artist.name}
           </p>
-          <p className="mt-3 font-script text-3xl text-white/80">{artist.quote}</p>
-        </div>
-
-        <div className="grid grid-cols-3 gap-4">
-          {artist.stats.map((stat, i) => {
-            const Icon = statIcons[i]
-            return (
-              <div key={stat.label} className="text-center">
-                <Icon className="mx-auto mb-2 size-7 text-brand" strokeWidth={1.25} />
-                <p className="font-display text-3xl tracking-wide text-white sm:text-4xl">
-                  {stat.value}
-                </p>
-                <p className="mt-1 text-[10px] tracking-[0.22em] text-white/55">
-                  {stat.label}
-                </p>
-              </div>
-            )
-          })}
+          <p className="mt-4 font-sans text-xl italic leading-snug tracking-wide text-white/85 sm:text-2xl">
+            {artist.quote}
+          </p>
         </div>
 
         <div>

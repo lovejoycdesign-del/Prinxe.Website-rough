@@ -50,17 +50,7 @@ export default function AboutPage() {
             direct line for fans who actually listen. No fake polish. No
             committee verses. If it did not happen, it does not ship.
           </p>
-          <div className="grid gap-4 border-t border-white/10 pt-6 sm:grid-cols-3">
-            {artist.stats.map((stat) => (
-              <div key={stat.label}>
-                <p className="font-display text-3xl text-brand">{stat.value}</p>
-                <p className="text-[10px] tracking-[0.2em] text-white/45">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-3 pt-2">
+          <div className="flex flex-wrap gap-3 border-t border-white/10 pt-6">
             <Link
               href="/videos"
               className="bg-brand px-4 py-2 text-[11px] tracking-[0.16em] text-white"
