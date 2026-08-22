@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { toast } from "sonner"
-import { bookingOffers, money, shows } from "@/lib/data"
+import { bookingOffers, money } from "@/lib/data"
 import { useCart } from "@/hooks/use-cart"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -17,9 +17,7 @@ const tips = [5, 10, 25, 50]
 export function PayDesk() {
   const params = useSearchParams()
   const intent = params.get("intent")
-  const showId = params.get("show")
-  const defaultTab =
-    intent === "tickets" ? "tickets" : intent === "book" ? "book" : "bag"
+  const defaultTab = intent === "book" ? "book" : "bag"
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
@@ -34,9 +32,6 @@ export function PayDesk() {
           <TabsTrigger value="tip" className="rounded-none">
             TIP
           </TabsTrigger>
-          <TabsTrigger value="tickets" className="rounded-none">
-            TICKETS
-          </TabsTrigger>
           <TabsTrigger value="book" className="rounded-none">
             DEPOSIT
           </TabsTrigger>
@@ -46,9 +41,6 @@ export function PayDesk() {
         </TabsContent>
         <TabsContent value="tip">
           <TipCheckout />
-        </TabsContent>
-        <TabsContent value="tickets">
-          <TicketCheckout preset={showId} />
         </TabsContent>
         <TabsContent value="book">
           <DepositCheckout />
@@ -167,49 +159,6 @@ function TipCheckout() {
         className="mt-4 h-10 rounded-none"
       />
       <CheckoutForm amount={value} label="Send tip" />
-    </div>
-  )
-}
-
-function TicketCheckout({ preset }: { preset: string | null }) {
-  const available = shows.filter((s) => s.status === "on-sale")
-  const [show, setShow] = useState(preset ?? available[0]?.id ?? "")
-  const [qty, setQty] = useState(2)
-  const selected = available.find((s) => s.id === show)
-  const price = 45
-  if (available.length === 0) {
-    return <Empty title="NO DATES ON SALE" copy="Check back." href="/tour" cta="TOUR" />
-  }
-  return (
-    <div className="panel p-5">
-      <Label htmlFor="show">Show</Label>
-      <select
-        id="show"
-        value={show}
-        onChange={(e) => setShow(e.target.value)}
-        className="mt-1 h-10 w-full border border-white/15 bg-black px-2 text-sm"
-      >
-        {available.map((s) => (
-          <option key={s.id} value={s.id}>
-            {s.date} · {s.venue} · {s.city}
-          </option>
-        ))}
-      </select>
-      <div className="mt-4 flex items-center gap-3">
-        <Label>Qty</Label>
-        <Input
-          type="number"
-          min={1}
-          max={8}
-          value={qty}
-          onChange={(e) => setQty(Number(e.target.value))}
-          className="h-10 w-24 rounded-none"
-        />
-      </div>
-      <p className="mt-4 text-sm text-white/50">
-        GA {money(price)} · {selected?.venue}
-      </p>
-      <CheckoutForm amount={price * qty} label="Pay tickets" />
     </div>
   )
 }

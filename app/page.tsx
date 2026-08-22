@@ -2,14 +2,13 @@ import type { ReactNode } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Play } from "lucide-react"
-import { artist, merch, platforms, shows, songs, videos } from "@/lib/data"
+import { artist, contacts, merch, platforms, songs, videos } from "@/lib/data"
 import { platformIcons } from "@/components/icons"
 import { Waveform } from "@/components/waveform"
 
 export default function HomePage() {
   const featured = songs.filter((s) => s.featured)
   const hoodie = merch[0]
-  const upcoming = shows.slice(0, 3)
   const featuredVideo = videos.find((v) => v.featured) ?? videos[0]
 
   return (
@@ -180,29 +179,22 @@ export default function HomePage() {
             </div>
           </HomeBlock>
 
-          <HomeBlock title="TOUR DATES" href="/tour" cta="SEE ALL TOUR DATES">
-            <ul className="space-y-3">
-              {upcoming.map((show) => (
-                <li
-                  key={show.id}
-                  className="flex items-center justify-between gap-3 border-b border-white/10 pb-3"
-                >
-                  <div>
-                    <p className="text-[11px] tracking-[0.16em] text-brand">
-                      {show.date}
-                    </p>
-                    <p className="text-sm font-medium">{show.venue}</p>
-                    <p className="text-[11px] text-white/45">{show.city}</p>
-                  </div>
-                  <Link
-                    href={show.ticketUrl ?? "/tour"}
-                    className="border border-white/40 px-2 py-1 text-[10px] tracking-[0.14em] hover:bg-white hover:text-black"
-                  >
-                    TICKETS
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <HomeBlock title="CONTACT" href="/contact" cta="GET IN TOUCH">
+            <div className="space-y-5 text-sm">
+              <div>
+                <p className="text-[11px] tracking-[0.18em] text-brand">ARTIST</p>
+                <p className="mt-1 text-white/35">Name —</p>
+                <p className="text-white/35">Email —</p>
+                <p className="text-white/35">Phone —</p>
+              </div>
+              <div>
+                <p className="text-[11px] tracking-[0.18em] text-brand">MANAGER</p>
+                <p className="mt-1 font-medium">{contacts.manager.name}</p>
+                <p className="text-white/70">{contacts.manager.email}</p>
+                <p className="text-white/70">{contacts.manager.phone}</p>
+                <p className="text-white/70">{contacts.manager.location}</p>
+              </div>
+            </div>
           </HomeBlock>
 
           <HomeBlock title="MERCH" href="/merch" cta="SHOP ALL">

@@ -39,13 +39,12 @@ export type MerchItem = {
   sizes: string[]
 }
 
-export type Show = {
-  id: string
-  date: string
-  city: string
-  venue: string
-  status: "on-sale" | "sold-out" | "soon"
-  ticketUrl?: string
+export type ContactCard = {
+  name: string
+  role: string
+  email: string
+  phone: string
+  location: string
 }
 
 export const platforms: { key: PlatformKey; label: string }[] = [
@@ -65,8 +64,9 @@ export const artist = {
     "Raw stories. Real emotions. Street anthems & melodies that hit your soul.",
   quote: "I write what I live.",
   location: "The city that raised him. The stages that keep him honest.",
-  email: "booking@daprinxe.com",
-  pressEmail: "press@daprinxe.com",
+  email: "",
+  pressEmail: "",
+  phone: "",
   socials: [
     {
       label: "Instagram",
@@ -91,13 +91,12 @@ export const nav = [
   { href: "/videos", label: "VIDEOS" },
   { href: "/music", label: "MUSIC" },
   { href: "/merch", label: "MERCH" },
-  { href: "/tour", label: "TOUR" },
+  { href: "/contact", label: "CONTACT" },
   { href: "/about", label: "ABOUT" },
 ]
 
 export const extraNav = [
   { href: "/inbox", label: "FAN DM" },
-  { href: "/contact", label: "CONTACT" },
   { href: "/pay", label: "PAY" },
   { href: "/book", label: "BOOK" },
   { href: "/press", label: "PRESS" },
@@ -243,69 +242,22 @@ export const merch: MerchItem[] = [
   },
 ]
 
-export const shows: Show[] = [
-  {
-    id: "la",
-    date: "SEP 15",
-    city: "Los Angeles, CA",
-    venue: "The Observatory",
-    status: "on-sale",
-    ticketUrl: "/pay?intent=tickets&show=la",
-  },
-  {
-    id: "hou",
-    date: "SEP 22",
-    city: "Houston, TX",
-    venue: "House of Blues",
-    status: "on-sale",
-    ticketUrl: "/pay?intent=tickets&show=hou",
-  },
-  {
-    id: "nyc",
-    date: "SEP 29",
-    city: "New York, NY",
-    venue: "Webster Hall",
-    status: "on-sale",
-    ticketUrl: "/pay?intent=tickets&show=nyc",
-  },
-  {
-    id: "sf",
-    date: "OCT 06",
-    city: "San Francisco, CA",
-    venue: "The Fillmore",
-    status: "on-sale",
-    ticketUrl: "/pay?intent=tickets&show=sf",
-  },
-  {
-    id: "chi",
-    date: "OCT 13",
-    city: "Chicago, IL",
-    venue: "House of Blues",
-    status: "soon",
-  },
-  {
-    id: "atl",
-    date: "OCT 20",
-    city: "Atlanta, GA",
-    venue: "The Tabernacle",
-    status: "soon",
-  },
-  {
-    id: "mia",
-    date: "NOV 03",
-    city: "Miami, FL",
-    venue: "The Ground",
-    status: "on-sale",
-    ticketUrl: "/pay?intent=tickets&show=mia",
-  },
-  {
-    id: "dal",
-    date: "NOV 10",
-    city: "Dallas, TX",
-    venue: "The Factory",
-    status: "sold-out",
-  },
-]
+export const contacts = {
+  artist: {
+    name: "",
+    role: "Artist",
+    email: "",
+    phone: "",
+    location: "",
+  } satisfies ContactCard,
+  manager: {
+    name: "LJ Chirombo",
+    role: "Manager",
+    email: "lovejoyc.design@gmail.com",
+    phone: "410-699-7677",
+    location: "Baltimore, MD",
+  } satisfies ContactCard,
+}
 
 export const bookingOffers = [
   {

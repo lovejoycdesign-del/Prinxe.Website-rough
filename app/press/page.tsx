@@ -46,8 +46,8 @@ export default function PressPage() {
               ["Also billed", artist.short],
               ["Lane", "Hip-hop / melody / street records"],
               ["Latest visual", "Crazy — Official Video"],
-              ["Booking", artist.email],
-              ["Press", artist.pressEmail],
+              ["Booking", artist.email || "—"],
+              ["Press", artist.pressEmail || "—"],
             ].map(([k, v]) => (
               <div key={k} className="border border-white/10 p-3">
                 <dt className="text-[10px] tracking-[0.18em] text-brand">{k}</dt>

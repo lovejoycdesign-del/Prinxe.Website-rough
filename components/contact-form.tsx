@@ -40,7 +40,7 @@ export function ContactForm() {
       <div className="panel p-8">
         <p className="font-display text-3xl tracking-[0.1em]">GOT IT.</p>
         <p className="mt-2 text-sm text-white/60">
-          If it is time-sensitive, follow up at booking@daprinxe.com.
+          If it is time-sensitive, use the manager line on the Contact page.
         </p>
         <Button
           className="mt-6 rounded-none bg-brand"

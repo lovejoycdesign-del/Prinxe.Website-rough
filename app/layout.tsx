@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s · DAPRINXE",
   },
   description:
-    "Official site for DAPRINXE. Stream Crazy, shop Real Ones merch, grab tour tickets, and talk to the artist.",
+    "Official site for DAPRINXE. Stream Crazy, shop merch, and reach the artist or manager.",
   icons: { icon: "/favicon.svg" },
 }
 

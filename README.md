@@ -2,7 +2,7 @@
 
 Official site for the hip-hop artist **DAPRINXE** — dark, cinematic, and built for the Real Ones.
 
-The homepage follows the artist preview: distressed wordmark, blood-red CTAs, *Crazy* and *Billie Jean* out now, plus merch, tour, and the join list. Videos is the next page after Home and embeds the official *Crazy* visual.
+The homepage follows the artist preview: distressed wordmark, blood-red CTAs, *Crazy* and *Billie Jean* out now, plus merch, contact, and the join list. Videos is the next page after Home and embeds the official *Crazy* visual.
 
 ## Pages
 
@@ -12,9 +12,8 @@ The homepage follows the artist preview: distressed wordmark, blood-red CTAs, *C
 | `/videos` | Music videos. *Crazy* is live. Add more YouTube links in the browser. |
 | `/music` | Catalog. Add songs and paste Spotify / Apple / YouTube / SoundCloud / Tidal URLs. |
 | `/merch` | Store. Hoodie, tee, cap, shorts. |
-| `/tour` | Upcoming dates and tickets. |
+| `/contact` | Artist (empty) and manager LJ Chirombo. |
 | `/about` | Artist story |
-| `/contact` | Bookings and press |
 | `/pay` | Demo checkout — merch, tips, tickets, booking deposits |
 | `/inbox` | Fan DMs |
 | `/join` | Real Ones list |
