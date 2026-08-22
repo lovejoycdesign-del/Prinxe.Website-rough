@@ -39,6 +39,28 @@ npm run build
 npm start
 ```
 
+## Deploy on Netlify
+
+This is a Next.js app. Let Netlify **build** it. Do not drag the `.next` folder into the dashboard.
+
+1. Push this repo to GitHub (`lovejoycdesign-del/Prinxe.Website-rough`).
+2. In [Netlify](https://app.netlify.com) click **Add new site** → **Import an existing project** → **GitHub**.
+3. Pick `Prinxe.Website-rough`.
+4. Confirm the settings (already in `netlify.toml`):
+   - **Build command:** `npm run build`
+   - **Publish directory:** `.next`
+   - **Node version:** `22`
+5. Click **Deploy site**. Netlify installs Next.js support automatically.
+
+Every later push to `main` rebuilds the live site.
+
+CLI option from your laptop (after `npm install -g netlify-cli` and `netlify login`):
+
+```bash
+npm install
+netlify deploy --build --prod
+```
+
 ## Stack
 
 Next.js, TypeScript, Tailwind CSS, shadcn/ui.
