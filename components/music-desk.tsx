@@ -154,10 +154,10 @@ export function MusicDesk() {
               >
                 <Image
                   src={song.cover}
-                  alt=""
-                  width={72}
-                  height={72}
-                  className="size-[72px] object-cover"
+                  alt={`${song.title} cover`}
+                  width={112}
+                  height={112}
+                  className="size-[96px] shrink-0 object-cover sm:size-[112px]"
                 />
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-semibold tracking-[0.12em]">

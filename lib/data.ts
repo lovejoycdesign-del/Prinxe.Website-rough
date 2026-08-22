@@ -165,7 +165,7 @@ export const songs: Song[] = [
     id: "distant-lover",
     title: "DISTANT LOVER",
     artist: "DAPRINXE",
-    cover: "/images/cover-crazy.png",
+    cover: "/images/cover-distant-lover.png",
     duration: "2:15",
     year: "2023",
     links: {},
