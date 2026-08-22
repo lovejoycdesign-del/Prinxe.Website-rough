@@ -64,4 +64,4 @@ netlify deploy --build --prod
 
 Next.js, TypeScript, Tailwind CSS, shadcn/ui.
 
-Swap the generated stills in `public/images/` for final photography whenever you have it. The *Crazy* thumbnail is the official YouTube frame.
+Covers and stills on the site are empty scenes and product shots — no portraits. Swap them for final art whenever you have it.

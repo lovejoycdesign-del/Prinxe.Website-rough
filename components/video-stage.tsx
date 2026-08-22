@@ -47,7 +47,7 @@ export function VideoStage() {
       id: v.id,
       title: v.title,
       director: "Added by you",
-      cover: `https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg`,
+      cover: "/images/video-room-empty.png",
       youtubeId: v.youtubeId,
       status: "live" as const,
     }))
