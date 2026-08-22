@@ -237,14 +237,14 @@ export const merch: MerchItem[] = [
     sizes: ["S/M", "L/XL"],
   },
   {
-    slug: "nameplate-chain",
-    title: "NAMEPLATE CHAIN",
-    price: 85,
-    image: "/images/merch-chain.png",
-    tag: "LIMITED",
+    slug: "real-ones-shorts",
+    title: "REAL ONES SHORTS",
+    price: 45,
+    image: "/images/merch-shorts.png",
+    tag: "NEW DROP",
     description:
-      "Silver-tone Cuban with a DAPRINXE nameplate. The same weight he wears in the visuals.",
-    sizes: ["20\"", "22\"", "24\""],
+      "Black mesh shorts, white distressed DAPRINXE mark on the thigh, Real Ones tag on the waist. Cut for the set and the after.",
+    sizes: ["S", "M", "L", "XL", "2XL"],
   },
 ]
 
