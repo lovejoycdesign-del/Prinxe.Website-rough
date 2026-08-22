@@ -6,7 +6,7 @@ import { PageBand } from "@/components/page-band"
 
 export const metadata: Metadata = {
   title: "Merch",
-  description: "Real Ones hoodie, stencil tee, fitted cap, and DAPRINXE shorts.",
+  description: "Hoodie, t-shirt, hat, and shorts from DAPRINXE.",
 }
 
 export default function MerchPage() {
