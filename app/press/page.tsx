@@ -15,6 +15,7 @@ export default function PressPage() {
         kicker="EPK"
         title="PRESS"
         copy="One sheet for writers, programmers, and rooms that need the facts without the fluff."
+        plain
       />
       <div className="mx-auto max-w-4xl space-y-10 px-4 py-12 sm:px-6">
         <section>
