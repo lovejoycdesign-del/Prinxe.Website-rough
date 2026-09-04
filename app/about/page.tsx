@@ -48,12 +48,6 @@ export default function AboutPage() {
             >
               WATCH CRAZY
             </Link>
-            <Link
-              href="/press"
-              className="border border-white/20 px-4 py-2 text-[11px] tracking-[0.16em]"
-            >
-              PRESS KIT
-            </Link>
           </div>
         </div>
       </div>
