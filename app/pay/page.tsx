@@ -6,7 +6,7 @@ import { PayDesk } from "@/components/pay-desk"
 export const metadata: Metadata = {
   title: "Payment",
   description:
-    "Tip DA PRINXE on Cash App at $daprinxe13. Every donation helps him build the brand.",
+    "Tip DA PRINXE on Cash App at $Daprinxe12. Every donation helps him build the brand.",
 }
 
 export default function PayPage() {

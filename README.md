@@ -14,12 +14,12 @@ The homepage follows the artist preview: distressed wordmark, blood-red CTAs, *C
 | `/merch` | Store. Hoodie, tee, cap, shorts. |
 | `/contact` | Artist (empty) and manager LJ Chirombo. |
 | `/about` | Artist story |
-| `/pay` | Payment / The Bag — Cash App `$daprinxe13` QR, plus a demo merch till |
+| `/pay` | Payment / The Bag — Cash App `$Daprinxe12` QR, plus a demo merch till |
 | `/inbox` | Fan DMs |
 | `/join` | Real Ones list |
 | `/book` | Shows, features, sessions |
 
-Song links, extra videos, the bag, and fan messages save in **this browser** (`localStorage`). Tips on `/pay` go to Cash App at [$daprinxe13](https://cash.app/$Daprinxe13). Merch and booking deposits on that page are still a walkthrough till.
+Song links, extra videos, the bag, and fan messages save in **this browser** (`localStorage`). Tips on `/pay` go to Cash App at [$Daprinxe12](https://cash.app/$daprinxe12). Merch and booking deposits on that page are still a walkthrough till.
 
 ## Run locally
 
