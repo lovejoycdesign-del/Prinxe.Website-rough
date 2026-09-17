@@ -13,7 +13,7 @@ export function MerchOptionCard({ item }: { item: MerchItem }) {
   const label = active?.label ?? item.title
 
   return (
-    <div className="panel overflow-hidden">
+    <div className="panel flex h-full flex-col overflow-hidden">
       <Link href={`/merch/${item.slug}`} className="group block">
         <div className="relative aspect-[3/2] bg-black">
           <img
@@ -31,7 +31,7 @@ export function MerchOptionCard({ item }: { item: MerchItem }) {
         </div>
       </Link>
       {options.length > 0 ? (
-        <div className="px-4 pb-4">
+        <div className="mt-auto px-4 pb-4">
           <MerchChoices
             options={options}
             activeId={activeId}
