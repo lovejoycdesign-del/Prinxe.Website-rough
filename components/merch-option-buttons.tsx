@@ -2,7 +2,7 @@
 
 import type { MerchVariant } from "@/lib/data"
 
-export function MerchChoices({
+export function MerchOptionButtons({
   options,
   activeId,
   onChange,
@@ -29,26 +29,13 @@ export function MerchChoices({
               event.stopPropagation()
               onChange(option.id)
             }}
-            className={`w-[7.25rem] border p-1 text-left ${
+            className={`min-w-20 border px-3 py-2 text-[10px] tracking-[0.16em] ${
               selected
-                ? "border-brand bg-brand/20"
-                : "border-white/20 hover:border-white"
+                ? "border-brand bg-brand text-white"
+                : "border-white/20 text-white/70 hover:border-white"
             }`}
           >
-            <span className="block aspect-[3/2] overflow-hidden bg-[#2a2a2a] ring-1 ring-white/10">
-              <img
-                src={option.image}
-                alt=""
-                className="h-full w-full object-contain"
-              />
-            </span>
-            <span
-              className={`mt-1 block text-center text-[10px] tracking-[0.16em] ${
-                selected ? "text-white" : "text-white/70"
-              }`}
-            >
-              {option.label}
-            </span>
+            {option.label}
           </button>
         )
       })}

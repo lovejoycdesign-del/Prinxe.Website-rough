@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { money, type MerchItem } from "@/lib/data"
-import { MerchChoices } from "@/components/merch-choices"
+import { MerchOptionButtons } from "@/components/merch-option-buttons"
 
 export function MerchOptionCard({ item }: { item: MerchItem }) {
   const options = item.variants ?? []
@@ -19,7 +19,7 @@ export function MerchOptionCard({ item }: { item: MerchItem }) {
           <img
             src={image}
             alt={label}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            className="h-full w-full object-cover"
           />
           <span className="absolute left-3 top-3 bg-brand px-2 py-1 text-[10px] tracking-[0.16em]">
             {item.tag}
@@ -32,7 +32,7 @@ export function MerchOptionCard({ item }: { item: MerchItem }) {
       </Link>
       {options.length > 0 ? (
         <div className="mt-auto px-4 pb-4">
-          <MerchChoices
+          <MerchOptionButtons
             options={options}
             activeId={activeId}
             onChange={setActiveId}
