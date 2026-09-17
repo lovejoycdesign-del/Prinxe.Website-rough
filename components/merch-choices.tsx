@@ -29,18 +29,17 @@ export function MerchChoices({
               event.stopPropagation()
               onChange(option.id)
             }}
-            className={`w-[6.25rem] border p-1 text-left ${
+            className={`w-[7.25rem] border p-1 text-left ${
               selected
                 ? "border-brand bg-brand/20"
                 : "border-white/20 hover:border-white"
             }`}
           >
-            {/* Native img so option clicks always swap the photo. */}
-            <span className="block aspect-[3/2] overflow-hidden bg-black">
+            <span className="block aspect-[3/2] overflow-hidden bg-[#2a2a2a] ring-1 ring-white/10">
               <img
                 src={option.image}
                 alt=""
-                className="h-full w-full object-cover"
+                className="h-full w-full object-contain"
               />
             </span>
             <span
