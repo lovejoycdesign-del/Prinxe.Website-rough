@@ -284,7 +284,7 @@ export const merch: MerchItem[] = [
     slug: "fitted-cap",
     title: "HAT / BEANIE",
     price: 10,
-    image: "/images/merch-beanie-born-drop.png",
+    image: "/images/merch-beanie-born-card.png",
     tag: "NEW",
     description:
       "Black beanie or cap. Born Different type across the front, eight-point star, red slash.",
@@ -293,12 +293,12 @@ export const merch: MerchItem[] = [
       {
         id: "beanie",
         label: "BEANIE",
-        image: "/images/merch-beanie-born-drop.png",
+        image: "/images/merch-beanie-born-card.png",
       },
       {
         id: "hat",
         label: "HAT",
-        image: "/images/merch-cap-born-drop.png",
+        image: "/images/merch-cap-born-card.png",
       },
     ],
   },

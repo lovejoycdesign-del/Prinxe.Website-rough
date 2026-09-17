@@ -1,9 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { money, type MerchItem } from "@/lib/data"
+import { MerchChoices } from "@/components/merch-choices"
 
 export function MerchOptionCard({ item }: { item: MerchItem }) {
   const options = item.variants ?? []
@@ -16,12 +16,10 @@ export function MerchOptionCard({ item }: { item: MerchItem }) {
     <div className="panel overflow-hidden">
       <Link href={`/merch/${item.slug}`} className="group block">
         <div className="relative aspect-[3/2] bg-black">
-          <Image
+          <img
             src={image}
             alt={label}
-            fill
-            className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-            key={image}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
           <span className="absolute left-3 top-3 bg-brand px-2 py-1 text-[10px] tracking-[0.16em]">
             {item.tag}
@@ -32,26 +30,15 @@ export function MerchOptionCard({ item }: { item: MerchItem }) {
           <p className="mt-1 text-brand">{money(item.price)}</p>
         </div>
       </Link>
-      <div className="flex gap-2 px-4 pb-4">
-        {options.map((option) => (
-            <button
-              key={option.id}
-              type="button"
-              onClick={(event) => {
-                event.preventDefault()
-                event.stopPropagation()
-                setActiveId(option.id)
-              }}
-              className={`min-w-20 border px-3 py-2 text-[10px] tracking-[0.16em] ${
-                option.id === activeId
-                  ? "border-brand bg-brand text-white"
-                  : "border-white/20 text-white/70 hover:border-white"
-              }`}
-            >
-            {option.label}
-          </button>
-        ))}
-      </div>
+      {options.length > 0 ? (
+        <div className="px-4 pb-4">
+          <MerchChoices
+            options={options}
+            activeId={activeId}
+            onChange={setActiveId}
+          />
+        </div>
+      ) : null}
     </div>
   )
 }
