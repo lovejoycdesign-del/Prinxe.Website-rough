@@ -6,9 +6,16 @@ import { money, type MerchItem } from "@/lib/data"
 import { useCart } from "@/hooks/use-cart"
 import { Button } from "@/components/ui/button"
 
-export function AddToCart({ item }: { item: MerchItem }) {
+export function AddToCart({
+  item,
+  optionLabel,
+}: {
+  item: MerchItem
+  optionLabel?: string
+}) {
   const { add } = useCart()
   const [size, setSize] = useState(item.sizes[2] ?? item.sizes[0])
+  const lineSize = optionLabel ? `${optionLabel} · ${size}` : size
 
   return (
     <div className="space-y-4">
@@ -39,9 +46,9 @@ export function AddToCart({ item }: { item: MerchItem }) {
             title: item.title,
             price: item.price,
             image: item.image,
-            size,
+            size: lineSize,
           })
-          toast.success(`${item.title} · ${size} added to bag.`)
+          toast.success(`${item.title} · ${lineSize} added to bag.`)
         }}
       >
         ADD TO BAG · {money(item.price)}

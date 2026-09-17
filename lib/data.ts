@@ -29,6 +29,12 @@ export type Video = {
   status: "live" | "soon"
 }
 
+export type MerchVariant = {
+  id: string
+  label: string
+  image: string
+}
+
 export type MerchItem = {
   slug: string
   title: string
@@ -37,6 +43,7 @@ export type MerchItem = {
   tag: string
   description: string
   sizes: string[]
+  variants?: MerchVariant[]
 }
 
 export type ContactCard = {
@@ -208,42 +215,74 @@ export const merch: MerchItem[] = [
   {
     slug: "real-ones-hoodie",
     title: "HOODIE",
-    price: 80,
-    image: "/images/merch-hoodie.png",
+    price: 70,
+    image: "/images/merch-hoodie.jpg",
     tag: "CORE DROP",
     description:
-      "Heavyweight black fleece. Distressed DAPRINXE mark on the chest. Built for late nights, long drives, and the people who stayed.",
+      "Vintage-black washed hoodie. Forever Searching face print up front, eclipse and wings on the back. Never settling.",
+    sizes: ["S", "M", "L", "XL", "2XL"],
+  },
+  {
+    slug: "real-ones-sweatpants",
+    title: "SWEATPANTS",
+    price: 50,
+    image: "/images/merch-sweatpants-drop.png",
+    tag: "CORE DROP",
+    description:
+      "Matching black fleece pants. Face print and red slash on the left leg, Forever Searching eclipse on the back.",
+    sizes: ["S", "M", "L", "XL", "2XL"],
+  },
+  {
+    slug: "real-ones-sweat-set",
+    title: "SWEATSUIT",
+    price: 120,
+    image: "/images/merch-sweatsuit-drop.png",
+    tag: "THE SUIT",
+    description:
+      "Hoodie and sweatpants together. Built Different circle up front, BD Clothing globe on the back. One bag, one look.",
     sizes: ["S", "M", "L", "XL", "2XL"],
   },
   {
     slug: "stencil-tee",
-    title: "T-SHIRT",
-    price: 50,
-    image: "/images/merch-tee.png",
+    title: "SHIRT",
+    price: 30,
+    image: "/images/merch-tee.jpg",
     tag: "ESSENTIAL",
     description:
-      "Oversized black tee with the white stencil wordmark. Soft wash, street cut, Real Ones tag on the hem.",
+      "Black work shirt. Quiet mark on the chest, Built Different globe print on the back. More than clothes.",
     sizes: ["S", "M", "L", "XL", "2XL"],
-  },
-  {
-    slug: "fitted-cap",
-    title: "HAT",
-    price: 40,
-    image: "/images/merch-cap.png",
-    tag: "NEW",
-    description:
-      "Black fitted cap, embroidered DAPRINXE front, red flash under the brim. Keep it low.",
-    sizes: ["S/M", "L/XL"],
   },
   {
     slug: "real-ones-shorts",
     title: "SHORTS",
-    price: 45,
-    image: "/images/merch-shorts.png",
+    price: 25,
+    image: "/images/merch-shorts-drop.png",
     tag: "NEW DROP",
     description:
-      "Black mesh shorts, white distressed DAPRINXE mark on the thigh, Real Ones tag on the waist. Cut for the set and the after.",
+      "Heavyweight black french terry shorts. Forever Searching face print up front, eclipse and wings on the back.",
     sizes: ["S", "M", "L", "XL", "2XL"],
+  },
+  {
+    slug: "fitted-cap",
+    title: "HAT / BEANIE",
+    price: 10,
+    image: "/images/merch-beanie-born-drop.png",
+    tag: "NEW",
+    description:
+      "Black beanie or cap. Born Different type across the front, eight-point star, red slash.",
+    sizes: ["S/M", "L/XL"],
+    variants: [
+      {
+        id: "beanie",
+        label: "BEANIE",
+        image: "/images/merch-beanie-born-drop.png",
+      },
+      {
+        id: "hat",
+        label: "HAT",
+        image: "/images/merch-cap-born-drop.png",
+      },
+    ],
   },
 ]
 
