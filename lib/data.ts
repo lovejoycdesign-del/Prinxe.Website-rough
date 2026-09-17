@@ -111,9 +111,9 @@ export const extraNav = [
 ]
 
 export const cashApp = {
-  tag: "$daprinxe12",
-  url: "https://cash.app/$daprinxe12",
-  qrSrc: "/images/cashapp-qr-daprinxe12.png",
+  tag: "$daprinxe13",
+  url: "https://cash.app/$Daprinxe13",
+  qrSrc: "/images/cashapp-qr-daprinxe13.png",
 }
 
 export const songs: Song[] = [
