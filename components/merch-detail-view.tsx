@@ -7,12 +7,15 @@ import { money, type MerchItem } from "@/lib/data"
 import { AddToCart } from "@/components/add-to-cart"
 
 export function MerchDetailView({ item }: { item: MerchItem }) {
-  const options = item.variants ?? []
+  const styleOptions = item.variants ?? []
+  const colorOptions = item.colors ?? []
+  const options = styleOptions.length ? styleOptions : colorOptions
+  const optionKind = colorOptions.length && !styleOptions.length ? "COLOR" : null
   const [activeId, setActiveId] = useState(options[0]?.id ?? "")
   const active = options.find((o) => o.id === activeId) ?? options[0]
   const selected: MerchItem = {
     ...item,
-    title: active?.label ?? item.title,
+    title: styleOptions.length ? (active?.label ?? item.title) : item.title,
     image: active?.image ?? item.image,
   }
 
@@ -21,7 +24,7 @@ export function MerchDetailView({ item }: { item: MerchItem }) {
       <div className="relative aspect-[4/3] overflow-hidden bg-black ring-1 ring-white/10">
         <Image
           src={selected.image}
-          alt={selected.title}
+          alt={`${item.title}${active?.label ? ` · ${active.label}` : ""}`}
           fill
           className="object-contain"
           priority
@@ -38,21 +41,28 @@ export function MerchDetailView({ item }: { item: MerchItem }) {
           {item.description}
         </p>
         {options.length > 0 ? (
-          <div className="mt-6 flex gap-2">
-            {options.map((option) => (
-              <button
-                key={option.id}
-                type="button"
-                onClick={() => setActiveId(option.id)}
-                className={`min-w-20 border px-3 py-2 text-[10px] tracking-[0.16em] ${
-                  option.id === activeId
-                    ? "border-brand bg-brand text-white"
-                    : "border-white/20 text-white/70 hover:border-white"
-                }`}
-              >
-                {option.label}
-              </button>
-            ))}
+          <div className="mt-6">
+            {optionKind ? (
+              <p className="text-[11px] tracking-[0.18em] text-white/50">
+                {optionKind}
+              </p>
+            ) : null}
+            <div className={`flex flex-wrap gap-2 ${optionKind ? "mt-2" : ""}`}>
+              {options.map((option) => (
+                <button
+                  key={option.id}
+                  type="button"
+                  onClick={() => setActiveId(option.id)}
+                  className={`min-w-20 border px-3 py-2 text-[10px] tracking-[0.16em] ${
+                    option.id === activeId
+                      ? "border-brand bg-brand text-white"
+                      : "border-white/20 text-white/70 hover:border-white"
+                  }`}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
           </div>
         ) : null}
         <div className="mt-8">

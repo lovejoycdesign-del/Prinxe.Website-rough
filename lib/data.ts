@@ -44,6 +44,7 @@ export type MerchItem = {
   description: string
   sizes: string[]
   variants?: MerchVariant[]
+  colors?: MerchVariant[]
 }
 
 export type ContactCard = {
@@ -229,8 +230,25 @@ export const merch: MerchItem[] = [
     image: "/images/merch-sweatpants-drop.png",
     tag: "CORE DROP",
     description:
-      "Matching black fleece pants. Face print and red slash on the left leg, Forever Searching eclipse on the back.",
+      "Fleece pants in black, grey, or white. Face print and red slash on the left leg, Forever Searching eclipse on the back.",
     sizes: ["S", "M", "L", "XL", "2XL"],
+    colors: [
+      {
+        id: "black",
+        label: "BLACK",
+        image: "/images/merch-sweatpants-drop.png",
+      },
+      {
+        id: "grey",
+        label: "GREY",
+        image: "/images/merch-sweatpants-grey-drop.png",
+      },
+      {
+        id: "white",
+        label: "WHITE",
+        image: "/images/merch-sweatpants-white-drop.png",
+      },
+    ],
   },
   {
     slug: "real-ones-sweat-set",
