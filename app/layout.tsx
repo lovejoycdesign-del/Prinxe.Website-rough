@@ -3,6 +3,7 @@ import { Allura, Bebas_Neue, Inter } from "next/font/google"
 import { Providers } from "@/components/providers"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
+import { bagCount, getBagItems } from "@/lib/bag-cookie"
 import "./globals.css"
 
 const inter = Inter({
@@ -32,7 +33,9 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.svg" },
 }
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const items = await getBagItems()
+
   return (
     <html
       lang="en"
@@ -41,7 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="grain min-h-full flex flex-col bg-black text-white">
         <Providers>
-          <SiteHeader />
+          <SiteHeader bagCount={bagCount(items)} />
           <main className="flex-1">{children}</main>
           <SiteFooter />
         </Providers>

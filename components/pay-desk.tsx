@@ -1,53 +1,92 @@
-"use client"
-
-import { useMemo, useState } from "react"
 import Image from "next/image"
-import { useSearchParams } from "next/navigation"
-import { toast } from "sonner"
 import { bookingOffers, cashApp, money } from "@/lib/data"
-import { useCart } from "@/hooks/use-cart"
+import { bagCount, bagTotal } from "@/lib/bag-cookie"
+import type { CartLine } from "@/lib/cart-line"
+import { demoPay } from "@/app/bag/actions"
 import { BagEmpty, BagLines } from "@/components/bag-lines"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 const tips = [5, 10, 25, 50]
 
-export function PayDesk() {
-  const params = useSearchParams()
-  const intent = params.get("intent")
-  const defaultTab = intent === "book" ? "book" : "bag"
+export type PayTab = "bag" | "tip" | "book"
 
+export function PayDesk({
+  tab,
+  items,
+  paid,
+  error,
+  amountParam,
+  offerParam,
+}: {
+  tab: PayTab
+  items: CartLine[]
+  paid?: string
+  error?: boolean
+  amountParam?: string
+  offerParam?: string
+}) {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
       <CashAppPay />
-      <BagShortcut />
+      <a
+        href="/bag"
+        className="mb-8 flex h-12 items-center justify-between border border-white/20 px-4 text-[12px] tracking-[0.18em] text-white hover:border-white"
+      >
+        <span>YOUR BAG</span>
+        <span>
+          {items.length > 0
+            ? `${bagCount(items)} ${bagCount(items) === 1 ? "PIECE" : "PIECES"} →`
+            : "VIEW →"}
+        </span>
+      </a>
       <p className="mb-6 text-xs text-white/45">
         Merch and booking deposits below are a demo till — no card is processed.
         Real tips go through Cash App.
       </p>
-      <Tabs defaultValue={defaultTab}>
-        <TabsList className="h-auto w-full flex-wrap rounded-none bg-white/5 p-1">
-          <TabsTrigger value="bag" className="rounded-none">
-            MERCH
-          </TabsTrigger>
-          <TabsTrigger value="tip" className="rounded-none">
-            TIP
-          </TabsTrigger>
-          <TabsTrigger value="book" className="rounded-none">
-            DEPOSIT
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value="bag">
-          <BagCheckout />
-        </TabsContent>
-        <TabsContent value="tip">
-          <TipCheckout />
-        </TabsContent>
-        <TabsContent value="book">
-          <DepositCheckout />
-        </TabsContent>
-      </Tabs>
+      <div className="flex h-auto w-full flex-wrap gap-1 bg-white/5 p-1">
+        <a
+          href="/pay"
+          className={`inline-flex min-h-10 flex-1 items-center justify-center px-3 text-[12px] tracking-[0.16em] ${
+            tab === "bag" ? "bg-brand text-white" : "text-white/70 hover:text-white"
+          }`}
+        >
+          MERCH
+        </a>
+        <a
+          href="/pay?tab=tip"
+          className={`inline-flex min-h-10 flex-1 items-center justify-center px-3 text-[12px] tracking-[0.16em] ${
+            tab === "tip" ? "bg-brand text-white" : "text-white/70 hover:text-white"
+          }`}
+        >
+          TIP
+        </a>
+        <a
+          href="/pay?tab=book"
+          className={`inline-flex min-h-10 flex-1 items-center justify-center px-3 text-[12px] tracking-[0.16em] ${
+            tab === "book" ? "bg-brand text-white" : "text-white/70 hover:text-white"
+          }`}
+        >
+          DEPOSIT
+        </a>
+      </div>
+      <div className="mt-4">
+        {tab === "tip" ? (
+          <TipCheckout
+            amountParam={amountParam}
+            paid={paid}
+            error={error}
+          />
+        ) : tab === "book" ? (
+          <DepositCheckout
+            offerParam={offerParam}
+            paid={paid}
+            error={error}
+          />
+        ) : (
+          <BagCheckout items={items} paid={paid} error={error} />
+        )}
+      </div>
     </div>
   )
 }
@@ -100,79 +139,50 @@ function CashAppPay() {
   )
 }
 
-function BagShortcut() {
-  const { count, ready } = useCart()
-  return (
-    <a
-      href="/bag"
-      className="mb-8 flex h-12 items-center justify-between border border-white/20 px-4 text-[12px] tracking-[0.18em] text-white hover:border-white"
-    >
-      <span>YOUR BAG</span>
-      <span>
-        {ready && count > 0
-          ? `${count} ${count === 1 ? "PIECE" : "PIECES"} →`
-          : "VIEW →"}
-      </span>
-    </a>
-  )
-}
-
-function BagCheckout() {
-  const { items, total, clear, ready } = useCart()
-  const [receipt, setReceipt] = useState<number | null>(null)
-
-  if (!ready) {
-    return (
-      <p className="px-4 py-10 text-center text-sm text-white/50">
-        Opening the bag…
-      </p>
-    )
+function BagCheckout({
+  items,
+  paid,
+  error,
+}: {
+  items: CartLine[]
+  paid?: string
+  error?: boolean
+}) {
+  if (paid) {
+    return <PaidNotice amount={Number(paid)} href="/pay" />
   }
-
-  if (receipt != null) {
-    return (
-      <div className="panel p-5">
-        <p className="font-display text-3xl tracking-[0.1em]">PAID.</p>
-        <p className="mt-2 text-sm text-white/65">
-          {money(receipt)} logged on this device. No live processor is attached
-          yet.
-        </p>
-        <button
-          type="button"
-          className="mt-4 inline-flex h-12 items-center bg-brand px-5 text-[12px] tracking-[0.18em] text-white"
-          onClick={() => setReceipt(null)}
-        >
-          RUN ANOTHER
-        </button>
-      </div>
-    )
-  }
-
   if (items.length === 0) {
     return <BagEmpty />
   }
   return (
     <div className="panel p-5">
-      <BagLines />
+      <BagLines items={items} />
       <p className="mt-6 text-right font-display text-3xl tracking-wide">
-        {money(total)}
+        {money(bagTotal(items))}
       </p>
       <CheckoutForm
-        amount={total}
+        amount={bagTotal(items)}
         label="Pay merch"
-        onPaid={() => {
-          setReceipt(total)
-          clear()
-        }}
+        kind="bag"
+        error={error}
       />
     </div>
   )
 }
 
-function TipCheckout() {
-  const [amount, setAmount] = useState(10)
-  const [custom, setCustom] = useState("")
-  const value = custom ? Number(custom) || 0 : amount
+function TipCheckout({
+  amountParam,
+  paid,
+  error,
+}: {
+  amountParam?: string
+  paid?: string
+  error?: boolean
+}) {
+  if (paid) {
+    return <PaidNotice amount={Number(paid)} href="/pay?tab=tip" />
+  }
+  const selected = Number(amountParam) || 10
   return (
     <div className="panel p-5">
       <p className="text-sm text-white/60">
@@ -189,59 +199,83 @@ function TipCheckout() {
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         {tips.map((n) => (
-          <button
+          <a
             key={n}
-            type="button"
-            onClick={() => {
-              setAmount(n)
-              setCustom("")
-            }}
-            className={`min-w-16 border px-3 py-2 text-sm ${
-              !custom && amount === n
-                ? "border-brand bg-brand"
-                : "border-white/20"
+            href={`/pay?tab=tip&amount=${n}`}
+            className={`inline-flex min-h-11 min-w-16 items-center justify-center border px-3 py-2 text-sm ${
+              selected === n ? "border-brand bg-brand" : "border-white/20"
             }`}
           >
             {money(n)}
-          </button>
+          </a>
         ))}
       </div>
-      <Input
-        type="number"
-        min={1}
-        placeholder="Custom amount"
-        value={custom}
-        onChange={(e) => setCustom(e.target.value)}
-        className="mt-4 h-10 rounded-none"
+      <CheckoutForm
+        amount={selected}
+        label="Send tip"
+        kind="tip"
+        error={error}
       />
-      <CheckoutForm amount={value} label="Send tip" />
     </div>
   )
 }
 
-function DepositCheckout() {
-  const [offerId, setOfferId] = useState(bookingOffers[0].id)
+function DepositCheckout({
+  offerParam,
+  paid,
+  error,
+}: {
+  offerParam?: string
+  paid?: string
+  error?: boolean
+}) {
+  if (paid) {
+    return <PaidNotice amount={Number(paid)} href="/pay?tab=book" />
+  }
+  const offerId = offerParam ?? bookingOffers[0].id
   const offer = bookingOffers.find((o) => o.id === offerId) ?? bookingOffers[0]
   return (
     <div className="panel p-5">
       <div className="grid gap-2">
         {bookingOffers.map((o) => (
-          <button
+          <a
             key={o.id}
-            type="button"
-            onClick={() => setOfferId(o.id)}
+            href={`/pay?tab=book&offer=${o.id}`}
             className={`border px-3 py-3 text-left ${
-              offerId === o.id ? "border-brand" : "border-white/15"
+              offer.id === o.id ? "border-brand" : "border-white/15"
             }`}
           >
             <p className="text-sm font-semibold tracking-wide">{o.title}</p>
             <p className="text-xs text-white/50">
               {o.price} · deposit {money(o.deposit)}
             </p>
-          </button>
+          </a>
         ))}
       </div>
-      <CheckoutForm amount={offer.deposit} label="Pay deposit" />
+      <CheckoutForm
+        amount={offer.deposit}
+        label="Pay deposit"
+        kind="book"
+        error={error}
+      />
+    </div>
+  )
+}
+
+function PaidNotice({ amount, href }: { amount: number; href: string }) {
+  return (
+    <div className="panel p-5">
+      <p className="font-display text-3xl tracking-[0.1em]">PAID.</p>
+      <p className="mt-2 text-sm text-white/65">
+        {money(Math.max(amount, 0))} logged on this device. No live processor is
+        attached yet.
+      </p>
+      <a
+        href={href}
+        className="mt-4 inline-flex h-12 items-center bg-brand px-5 text-[12px] tracking-[0.18em] text-white"
+      >
+        RUN ANOTHER
+      </a>
     </div>
   )
 }
@@ -249,76 +283,33 @@ function DepositCheckout() {
 function CheckoutForm({
   amount,
   label,
-  onPaid,
+  kind,
+  error,
 }: {
   amount: number
   label: string
-  onPaid?: () => void
+  kind: PayTab
+  error?: boolean
 }) {
-  const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">(
-    "idle"
-  )
-  const [error, setError] = useState("")
-  const pretty = useMemo(() => money(Math.max(amount, 0)), [amount])
-
-  function pay(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    if (amount <= 0) {
-      setStatus("error")
-      setError("Amount has to be more than zero.")
-      return
-    }
-    const data = new FormData(e.currentTarget)
-    const name = String(data.get("cardname") ?? "").trim()
-    const number = String(data.get("card") ?? "").replace(/\s/g, "")
-    if (!name || number.length < 12) {
-      setStatus("error")
-      setError("Name and a card number (demo — any 12+ digits).")
-      return
-    }
-    setError("")
-    setStatus("loading")
-    window.setTimeout(() => {
-      setStatus("done")
-      onPaid?.()
-      toast.success(`Demo payment recorded · ${pretty}`)
-    }, 900)
-  }
-
-  if (status === "done") {
-    return (
-      <div className="mt-6 border border-brand/40 bg-brand/10 p-5">
-        <p className="font-display text-3xl tracking-[0.1em]">PAID.</p>
-        <p className="mt-2 text-sm text-white/65">
-          {pretty} logged on this device. No live processor is attached yet.
-        </p>
-        <button
-          type="button"
-          className="mt-4 inline-flex h-12 items-center bg-brand px-5 text-[12px] tracking-[0.18em] text-white"
-          onClick={() => setStatus("idle")}
-        >
-          Run another
-        </button>
-      </div>
-    )
-  }
-
+  const pretty = money(Math.max(amount, 0))
   return (
-    <form onSubmit={pay} className="mt-6 space-y-3">
+    <form action={demoPay} className="mt-6 space-y-3">
+      <input type="hidden" name="kind" value={kind} />
+      <input type="hidden" name="amount" value={amount} />
       <div className="grid gap-3 sm:grid-cols-2">
         <div>
-          <Label htmlFor="cardname">Name on card</Label>
+          <Label htmlFor={`${kind}-cardname`}>Name on card</Label>
           <Input
-            id="cardname"
+            id={`${kind}-cardname`}
             name="cardname"
             className="mt-1 h-10 rounded-none"
             placeholder="REAL ONE"
           />
         </div>
         <div>
-          <Label htmlFor="card">Card number</Label>
+          <Label htmlFor={`${kind}-card`}>Card number</Label>
           <Input
-            id="card"
+            id={`${kind}-card`}
             name="card"
             className="mt-1 h-10 rounded-none"
             placeholder="4242 4242 4242 4242"
@@ -327,21 +318,34 @@ function CheckoutForm({
       </div>
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <Label htmlFor="exp">Exp</Label>
-          <Input id="exp" name="exp" placeholder="09/28" className="mt-1 h-10 rounded-none" />
+          <Label htmlFor={`${kind}-exp`}>Exp</Label>
+          <Input
+            id={`${kind}-exp`}
+            name="exp"
+            placeholder="09/28"
+            className="mt-1 h-10 rounded-none"
+          />
         </div>
         <div>
-          <Label htmlFor="cvc">CVC</Label>
-          <Input id="cvc" name="cvc" placeholder="123" className="mt-1 h-10 rounded-none" />
+          <Label htmlFor={`${kind}-cvc`}>CVC</Label>
+          <Input
+            id={`${kind}-cvc`}
+            name="cvc"
+            placeholder="123"
+            className="mt-1 h-10 rounded-none"
+          />
         </div>
       </div>
-      {status === "error" ? <p className="text-xs text-brand">{error}</p> : null}
+      {error ? (
+        <p className="text-xs text-brand">
+          Name and a card number (demo — any 12+ digits).
+        </p>
+      ) : null}
       <button
         type="submit"
-        disabled={status === "loading"}
-        className="inline-flex h-12 w-full items-center justify-center bg-brand text-[12px] tracking-[0.18em] text-white disabled:opacity-60"
+        className="inline-flex h-12 w-full items-center justify-center bg-brand text-[12px] tracking-[0.18em] text-white"
       >
-        {status === "loading" ? "PROCESSING…" : `${label.toUpperCase()} · ${pretty}`}
+        {`${label.toUpperCase()} · ${pretty}`}
       </button>
     </form>
   )

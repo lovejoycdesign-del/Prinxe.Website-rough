@@ -1,14 +1,16 @@
 import type { Metadata } from "next"
-import { Suspense } from "react"
 import { PageBand } from "@/components/page-band"
 import { BagView } from "@/components/bag-view"
+import { getBagItems } from "@/lib/bag-cookie"
 
 export const metadata: Metadata = {
   title: "Bag",
   description: "Pieces in your DA PRINXE bag. Change quantities, then checkout.",
 }
 
-export default function BagPage() {
+export default async function BagPage() {
+  const items = await getBagItems()
+
   return (
     <div>
       <PageBand
@@ -16,15 +18,7 @@ export default function BagPage() {
         title="BAG"
         copy="Everything you add lands here — color, size, and count. Drop a piece or take it to checkout when the bag is right."
       />
-      <Suspense
-        fallback={
-          <p className="px-4 py-16 text-center text-sm text-white/50">
-            Opening the bag…
-          </p>
-        }
-      >
-        <BagView />
-      </Suspense>
+      <BagView items={items} />
     </div>
   )
 }

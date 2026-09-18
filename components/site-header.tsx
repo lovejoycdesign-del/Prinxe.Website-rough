@@ -1,11 +1,9 @@
 "use client"
 
-import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu, ShoppingBag } from "lucide-react"
 import { artist, extraNav, nav } from "@/lib/data"
 import { socialIcons } from "@/components/icons"
-import { useCart } from "@/hooks/use-cart"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -16,23 +14,22 @@ import {
 } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
 
-export function SiteHeader() {
+export function SiteHeader({ bagCount = 0 }: { bagCount?: number }) {
   const pathname = usePathname()
-  const { count } = useCart()
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-black/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-3 px-4 sm:px-6">
-        <Link
+        <a
           href="/"
           className="font-display text-2xl tracking-[0.16em] text-white sm:text-[1.7rem]"
         >
           {artist.name}
-        </Link>
+        </a>
 
         <nav className="hidden items-center gap-4 xl:gap-6 lg:flex">
           {nav.map((item) => (
-            <Link
+            <a
               key={item.href}
               href={item.href}
               className={cn(
@@ -43,7 +40,7 @@ export function SiteHeader() {
               )}
             >
               {item.label}
-            </Link>
+            </a>
           ))}
         </nav>
 
@@ -72,25 +69,25 @@ export function SiteHeader() {
               "relative inline-flex h-11 min-w-11 items-center justify-center gap-2 px-2 text-white/80 hover:text-white",
               pathname === "/bag" && "text-brand"
             )}
-            aria-label={count > 0 ? `Bag, ${count} items` : "Bag"}
+            aria-label={bagCount > 0 ? `Bag, ${bagCount} items` : "Bag"}
           >
             <ShoppingBag className="size-5" />
             <span className="hidden text-[11px] font-semibold tracking-[0.18em] sm:inline">
               BAG
             </span>
-            {count > 0 ? (
+            {bagCount > 0 ? (
               <span className="absolute right-0 top-1 grid size-4 place-items-center rounded-full bg-brand text-[9px] font-bold text-white sm:right-1">
-                {count}
+                {bagCount}
               </span>
             ) : null}
           </a>
 
-          <Link
+          <a
             href="/join"
             className="hidden h-9 items-center border border-white px-3 text-[10px] font-semibold tracking-[0.16em] text-white transition-colors hover:bg-white hover:text-black md:inline-flex"
           >
             JOIN THE REAL ONES
-          </Link>
+          </a>
 
           <Sheet>
             <SheetTrigger
@@ -117,7 +114,7 @@ export function SiteHeader() {
               </SheetHeader>
               <div className="flex flex-col gap-1 px-4">
                 {[...nav, ...extraNav].map((item) => (
-                  <Link
+                  <a
                     key={item.href}
                     href={item.href}
                     className={cn(
@@ -126,7 +123,7 @@ export function SiteHeader() {
                     )}
                   >
                     {item.label}
-                  </Link>
+                  </a>
                 ))}
               </div>
             </SheetContent>

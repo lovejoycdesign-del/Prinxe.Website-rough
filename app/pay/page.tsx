@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
-import { Suspense } from "react"
 import { PageBand } from "@/components/page-band"
-import { PayDesk } from "@/components/pay-desk"
+import { PayDesk, type PayTab } from "@/components/pay-desk"
+import { getBagItems } from "@/lib/bag-cookie"
 
 export const metadata: Metadata = {
   title: "Payment",
@@ -9,7 +9,33 @@ export const metadata: Metadata = {
     "Tip DA PRINXE on Cash App at $Daprinxe12. Every donation helps him build the brand.",
 }
 
-export default function PayPage() {
+function first(value?: string | string[]) {
+  return Array.isArray(value) ? value[0] : value
+}
+
+export default async function PayPage({
+  searchParams,
+}: {
+  searchParams: Promise<{
+    tab?: string | string[]
+    intent?: string | string[]
+    paid?: string | string[]
+    error?: string | string[]
+    amount?: string | string[]
+    offer?: string | string[]
+  }>
+}) {
+  const params = await searchParams
+  const rawTab = first(params.tab)
+  const intent = first(params.intent)
+  const tab: PayTab =
+    rawTab === "tip" || rawTab === "book"
+      ? rawTab
+      : intent === "book"
+        ? "book"
+        : "bag"
+  const items = await getBagItems()
+
   return (
     <div>
       <PageBand
@@ -17,15 +43,14 @@ export default function PayPage() {
         title="PAYMENT"
         copy="Every tip, donation, and dollar of support means something while DA PRINXE builds this brand from the ground up. He does not take that lightly. The love goes both ways — the same respect he shows his community is the reason he keeps showing up, writing what he lives, putting his pain on the records and his soul into the sound."
       />
-      <Suspense
-        fallback={
-          <p className="px-4 py-16 text-center text-sm text-white/50">
-            Opening the till…
-          </p>
-        }
-      >
-        <PayDesk />
-      </Suspense>
+      <PayDesk
+        tab={tab}
+        items={items}
+        paid={first(params.paid)}
+        error={first(params.error) === "1"}
+        amountParam={first(params.amount)}
+        offerParam={first(params.offer)}
+      />
     </div>
   )
 }

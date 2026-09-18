@@ -1,12 +1,8 @@
-"use client"
-
 import { money } from "@/lib/data"
-import { cartLineKey } from "@/lib/cart-line"
-import { useCart } from "@/hooks/use-cart"
+import { cartLineKey, type CartLine } from "@/lib/cart-line"
+import { removeBagItem, setBagQty } from "@/app/bag/actions"
 
-export function BagLines() {
-  const { items, setQty, remove } = useCart()
-
+export function BagLines({ items }: { items: CartLine[] }) {
   return (
     <ul className="divide-y divide-white/10">
       {items.map((line) => {
@@ -38,30 +34,38 @@ export function BagLines() {
                 </p>
               </div>
               <div className="mt-3 flex flex-wrap items-center gap-2">
-                <button
-                  type="button"
-                  className="grid size-9 place-items-center border border-white/20 text-lg leading-none"
-                  onClick={() => setQty(key, line.qty - 1)}
-                  aria-label={`Fewer ${line.title}`}
-                >
-                  −
-                </button>
+                <form action={setBagQty}>
+                  <input type="hidden" name="key" value={key} />
+                  <input type="hidden" name="qty" value={line.qty - 1} />
+                  <button
+                    type="submit"
+                    className="grid size-9 place-items-center border border-white/20 text-lg leading-none"
+                    aria-label={`Fewer ${line.title}`}
+                  >
+                    −
+                  </button>
+                </form>
                 <span className="w-8 text-center text-sm">{line.qty}</span>
-                <button
-                  type="button"
-                  className="grid size-9 place-items-center border border-white/20 text-lg leading-none"
-                  onClick={() => setQty(key, line.qty + 1)}
-                  aria-label={`More ${line.title}`}
-                >
-                  +
-                </button>
-                <button
-                  type="button"
-                  className="ml-1 min-h-9 px-2 text-[10px] tracking-[0.14em] text-white/45 hover:text-white"
-                  onClick={() => remove(key)}
-                >
-                  REMOVE
-                </button>
+                <form action={setBagQty}>
+                  <input type="hidden" name="key" value={key} />
+                  <input type="hidden" name="qty" value={line.qty + 1} />
+                  <button
+                    type="submit"
+                    className="grid size-9 place-items-center border border-white/20 text-lg leading-none"
+                    aria-label={`More ${line.title}`}
+                  >
+                    +
+                  </button>
+                </form>
+                <form action={removeBagItem}>
+                  <input type="hidden" name="key" value={key} />
+                  <button
+                    type="submit"
+                    className="ml-1 min-h-9 px-2 text-[10px] tracking-[0.14em] text-white/45 hover:text-white"
+                  >
+                    REMOVE
+                  </button>
+                </form>
               </div>
             </div>
           </li>
