@@ -100,3 +100,46 @@ export function MerchOptionNames({
     </div>
   )
 }
+
+export function sizeInputId(name: string, size: string) {
+  return `${name}-${size.replace(/[^A-Za-z0-9]+/g, "-")}`
+}
+
+export function MerchSizeNames({
+  name,
+  sizes,
+  defaultSize,
+}: {
+  name: string
+  sizes: string[]
+  defaultSize: string
+}) {
+  return (
+    <div className="merch-switch-controls">
+      <p className="mb-2 w-full text-[11px] tracking-[0.18em] text-white/50">
+        SIZE
+      </p>
+      {sizes.map((size) => {
+        const id = sizeInputId(name, size)
+        return (
+          <label
+            key={size}
+            htmlFor={id}
+            className="merch-switch-label merch-size-label"
+            data-option={size}
+          >
+            <input
+              id={id}
+              type="radio"
+              name={name}
+              value={size}
+              defaultChecked={size === defaultSize}
+              className="merch-size-input"
+            />
+            {size}
+          </label>
+        )
+      })}
+    </div>
+  )
+}

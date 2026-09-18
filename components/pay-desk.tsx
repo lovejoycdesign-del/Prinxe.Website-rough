@@ -2,12 +2,10 @@
 
 import { useMemo, useState } from "react"
 import Image from "next/image"
-import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { toast } from "sonner"
 import { bookingOffers, cashApp, money } from "@/lib/data"
 import { useCart } from "@/hooks/use-cart"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -101,7 +99,36 @@ function CashAppPay() {
 }
 
 function BagCheckout() {
-  const { items, total, setQty, remove, clear } = useCart()
+  const { items, total, setQty, remove, clear, ready } = useCart()
+  const [receipt, setReceipt] = useState<number | null>(null)
+
+  if (!ready) {
+    return (
+      <p className="px-4 py-10 text-center text-sm text-white/50">
+        Opening the bag…
+      </p>
+    )
+  }
+
+  if (receipt != null) {
+    return (
+      <div className="panel p-5">
+        <p className="font-display text-3xl tracking-[0.1em]">PAID.</p>
+        <p className="mt-2 text-sm text-white/65">
+          {money(receipt)} logged on this device. No live processor is attached
+          yet.
+        </p>
+        <button
+          type="button"
+          className="mt-4 inline-flex h-12 items-center bg-brand px-5 text-[12px] tracking-[0.18em] text-white"
+          onClick={() => setReceipt(null)}
+        >
+          RUN ANOTHER
+        </button>
+      </div>
+    )
+  }
+
   if (items.length === 0) {
     return (
       <Empty
@@ -164,6 +191,7 @@ function BagCheckout() {
         amount={total}
         label="Pay merch"
         onPaid={() => {
+          setReceipt(total)
           clear()
         }}
       />
@@ -294,12 +322,13 @@ function CheckoutForm({
         <p className="mt-2 text-sm text-white/65">
           {pretty} logged on this device. No live processor is attached yet.
         </p>
-        <Button
-          className="mt-4 rounded-none bg-brand"
+        <button
+          type="button"
+          className="mt-4 inline-flex h-12 items-center bg-brand px-5 text-[12px] tracking-[0.18em] text-white"
           onClick={() => setStatus("idle")}
         >
           Run another
-        </Button>
+        </button>
       </div>
     )
   }
@@ -337,13 +366,13 @@ function CheckoutForm({
         </div>
       </div>
       {status === "error" ? <p className="text-xs text-brand">{error}</p> : null}
-      <Button
+      <button
         type="submit"
         disabled={status === "loading"}
-        className="h-12 w-full rounded-none bg-brand text-[12px] tracking-[0.18em]"
+        className="inline-flex h-12 w-full items-center justify-center bg-brand text-[12px] tracking-[0.18em] text-white disabled:opacity-60"
       >
         {status === "loading" ? "PROCESSING…" : `${label.toUpperCase()} · ${pretty}`}
-      </Button>
+      </button>
     </form>
   )
 }
@@ -363,12 +392,12 @@ function Empty({
     <div className="panel p-10 text-center">
       <p className="font-display text-3xl tracking-[0.1em]">{title}</p>
       <p className="mt-2 text-sm text-white/50">{copy}</p>
-      <Link
+      <a
         href={href}
         className="mt-6 inline-flex bg-brand px-4 py-2 text-[11px] tracking-[0.16em]"
       >
         {cta}
-      </Link>
+      </a>
     </div>
   )
 }

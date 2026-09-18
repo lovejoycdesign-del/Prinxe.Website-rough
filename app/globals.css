@@ -207,6 +207,26 @@
   color: #fff;
 }
 
+.merch-size-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+  pointer-events: none;
+}
+
+.merch-switch-label:has(.merch-size-input:checked),
+.merch-size-label:has(input:checked) {
+  border-color: #c4161c;
+  background: #c4161c;
+  color: #fff;
+}
+
 .merch-switch > .merch-switch-input:checked ~ .merch-switch-frame .merch-layer,
 .merch-switch:has(input:checked) .merch-layer {
   opacity: 0;

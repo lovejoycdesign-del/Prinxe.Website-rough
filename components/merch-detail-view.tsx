@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { money, type MerchItem } from "@/lib/data"
 import { AddToCart } from "@/components/add-to-cart"
 import {
@@ -41,12 +40,6 @@ export function MerchDetailView({ item }: { item: MerchItem }) {
           optionLabel={options[0]?.label}
         />
       </div>
-      <Link
-        href="/pay"
-        className="mt-4 text-[11px] tracking-[0.16em] text-white/50 hover:text-white"
-      >
-        GO TO CHECKOUT →
-      </Link>
     </div>
   )
 
