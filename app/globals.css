@@ -260,3 +260,145 @@
   background: #c4161c;
   color: #fff;
 }
+
+.pay-tab-input,
+.pay-choice-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+  pointer-events: none;
+}
+
+.pay-tab-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.25rem;
+}
+
+.pay-tab-bar label {
+  display: inline-flex;
+  min-height: 2.5rem;
+  flex: 1;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.75rem;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.7);
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.pay-tab-bar label:hover {
+  color: #fff;
+}
+
+.pay-switch > .pay-tab-input[value="bag"]:checked ~ .pay-tab-bar label[for="pay-tab-bag"],
+.pay-switch > .pay-tab-input[value="tip"]:checked ~ .pay-tab-bar label[for="pay-tab-tip"],
+.pay-switch > .pay-tab-input[value="book"]:checked ~ .pay-tab-bar label[for="pay-tab-book"],
+.pay-switch:has(#pay-tab-bag:checked) .pay-tab-bar label[for="pay-tab-bag"],
+.pay-switch:has(#pay-tab-tip:checked) .pay-tab-bar label[for="pay-tab-tip"],
+.pay-switch:has(#pay-tab-book:checked) .pay-tab-bar label[for="pay-tab-book"] {
+  background: #c4161c;
+  color: #fff;
+}
+
+.pay-panel {
+  display: none;
+  margin-top: 1rem;
+  animation: pay-fade 0.18s ease;
+}
+
+.pay-switch > .pay-tab-input[value="bag"]:checked ~ .pay-panel[data-tab="bag"],
+.pay-switch > .pay-tab-input[value="tip"]:checked ~ .pay-panel[data-tab="tip"],
+.pay-switch > .pay-tab-input[value="book"]:checked ~ .pay-panel[data-tab="book"],
+.pay-switch:has(#pay-tab-bag:checked) .pay-panel[data-tab="bag"],
+.pay-switch:has(#pay-tab-tip:checked) .pay-panel[data-tab="tip"],
+.pay-switch:has(#pay-tab-book:checked) .pay-panel[data-tab="book"] {
+  display: block;
+}
+
+@keyframes pay-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.pay-choice,
+.pay-offer {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.pay-choice {
+  display: inline-flex;
+  min-height: 2.75rem;
+  min-width: 4rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 0.75rem;
+  font-size: 14px;
+}
+
+.pay-offer {
+  display: flex;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.pay-choice:hover,
+.pay-offer:hover {
+  border-color: #fff;
+}
+
+.pay-choice:has(input:checked),
+.pay-offer:has(input:checked) {
+  border-color: #c4161c;
+  background: #c4161c;
+  color: #fff;
+}
+
+.pay-offer:has(input:checked) .pay-offer-meta {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.pay-live-amount {
+  display: none;
+}
+
+.pay-live-amount[data-value="10"],
+.pay-live-amount[data-value="show"] {
+  display: inline;
+}
+
+.pay-form:has(input[name="amount"]:checked) .pay-live-amount,
+.pay-form:has(input[name="offer"]:checked) .pay-live-amount {
+  display: none;
+}
+
+.pay-form:has(input[name="amount"][value="5"]:checked) .pay-live-amount[data-value="5"],
+.pay-form:has(input[name="amount"][value="10"]:checked) .pay-live-amount[data-value="10"],
+.pay-form:has(input[name="amount"][value="25"]:checked) .pay-live-amount[data-value="25"],
+.pay-form:has(input[name="amount"][value="50"]:checked) .pay-live-amount[data-value="50"],
+.pay-form:has(input[name="offer"][value="show"]:checked) .pay-live-amount[data-value="show"],
+.pay-form:has(input[name="offer"][value="feature"]:checked) .pay-live-amount[data-value="feature"],
+.pay-form:has(input[name="offer"][value="collab"]:checked) .pay-live-amount[data-value="collab"],
+.pay-form:has(input[name="offer"][value="brand"]:checked) .pay-live-amount[data-value="brand"] {
+  display: inline;
+}

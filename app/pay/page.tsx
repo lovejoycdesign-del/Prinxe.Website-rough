@@ -48,8 +48,6 @@ export default async function PayPage({
         items={items}
         paid={first(params.paid)}
         error={first(params.error) === "1"}
-        amountParam={first(params.amount)}
-        offerParam={first(params.offer)}
       />
     </div>
   )

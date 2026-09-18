@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
+import { bookingOffers } from "@/lib/data"
 import { cartLineKey } from "@/lib/cart-line"
 import {
   addBagSelection,
@@ -49,7 +50,13 @@ export async function demoPay(formData: FormData) {
   const name = String(formData.get("cardname") ?? "").trim()
   const number = String(formData.get("card") ?? "").replace(/\s/g, "")
   const kind = String(formData.get("kind") ?? "bag")
-  const amount = Number(formData.get("amount") ?? 0)
+  const offer = bookingOffers.find(
+    (item) => item.id === String(formData.get("offer") ?? "")
+  )
+  const amount =
+    kind === "book" && offer
+      ? offer.deposit
+      : Number(formData.get("amount") ?? 0)
   const tab = kind === "tip" || kind === "book" ? kind : "bag"
   if (!name || number.length < 12 || !(amount > 0)) {
     redirect(`/pay?tab=${tab}&error=1`)

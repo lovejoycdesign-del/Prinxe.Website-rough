@@ -16,15 +16,11 @@ export function PayDesk({
   items,
   paid,
   error,
-  amountParam,
-  offerParam,
 }: {
   tab: PayTab
   items: CartLine[]
   paid?: string
   error?: boolean
-  amountParam?: string
-  offerParam?: string
 }) {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
@@ -44,48 +40,45 @@ export function PayDesk({
         Merch and booking deposits below are a demo till — no card is processed.
         Real tips go through Cash App.
       </p>
-      <div className="flex h-auto w-full flex-wrap gap-1 bg-white/5 p-1">
-        <a
-          href="/pay"
-          className={`inline-flex min-h-10 flex-1 items-center justify-center px-3 text-[12px] tracking-[0.16em] ${
-            tab === "bag" ? "bg-brand text-white" : "text-white/70 hover:text-white"
-          }`}
-        >
-          MERCH
-        </a>
-        <a
-          href="/pay?tab=tip"
-          className={`inline-flex min-h-10 flex-1 items-center justify-center px-3 text-[12px] tracking-[0.16em] ${
-            tab === "tip" ? "bg-brand text-white" : "text-white/70 hover:text-white"
-          }`}
-        >
-          TIP
-        </a>
-        <a
-          href="/pay?tab=book"
-          className={`inline-flex min-h-10 flex-1 items-center justify-center px-3 text-[12px] tracking-[0.16em] ${
-            tab === "book" ? "bg-brand text-white" : "text-white/70 hover:text-white"
-          }`}
-        >
-          DEPOSIT
-        </a>
-      </div>
-      <div className="mt-4">
-        {tab === "tip" ? (
-          <TipCheckout
-            amountParam={amountParam}
-            paid={paid}
-            error={error}
-          />
-        ) : tab === "book" ? (
-          <DepositCheckout
-            offerParam={offerParam}
-            paid={paid}
-            error={error}
-          />
-        ) : (
+      <div className="pay-switch">
+        <input
+          id="pay-tab-bag"
+          className="pay-tab-input"
+          type="radio"
+          name="pay-tab"
+          value="bag"
+          defaultChecked={tab === "bag"}
+        />
+        <input
+          id="pay-tab-tip"
+          className="pay-tab-input"
+          type="radio"
+          name="pay-tab"
+          value="tip"
+          defaultChecked={tab === "tip"}
+        />
+        <input
+          id="pay-tab-book"
+          className="pay-tab-input"
+          type="radio"
+          name="pay-tab"
+          value="book"
+          defaultChecked={tab === "book"}
+        />
+        <div className="pay-tab-bar">
+          <label htmlFor="pay-tab-bag">MERCH</label>
+          <label htmlFor="pay-tab-tip">TIP</label>
+          <label htmlFor="pay-tab-book">DEPOSIT</label>
+        </div>
+        <div className="pay-panel" data-tab="bag">
           <BagCheckout items={items} paid={paid} error={error} />
-        )}
+        </div>
+        <div className="pay-panel" data-tab="tip">
+          <TipCheckout paid={paid} error={error} />
+        </div>
+        <div className="pay-panel" data-tab="book">
+          <DepositCheckout paid={paid} error={error} />
+        </div>
       </div>
     </div>
   )
@@ -149,7 +142,7 @@ function BagCheckout({
   error?: boolean
 }) {
   if (paid) {
-    return <PaidNotice amount={Number(paid)} href="/pay" />
+    return <PaidNotice amount={Number(paid)} />
   }
   if (items.length === 0) {
     return <BagEmpty />
@@ -171,18 +164,15 @@ function BagCheckout({
 }
 
 function TipCheckout({
-  amountParam,
   paid,
   error,
 }: {
-  amountParam?: string
   paid?: string
   error?: boolean
 }) {
   if (paid) {
-    return <PaidNotice amount={Number(paid)} href="/pay?tab=tip" />
+    return <PaidNotice amount={Number(paid)} />
   }
-  const selected = Number(amountParam) || 10
   return (
     <div className="panel p-5">
       <p className="text-sm text-white/60">
@@ -197,72 +187,92 @@ function TipCheckout({
         </a>
         . Every tip is a thank-you, not a transaction with strings.
       </p>
-      <div className="mt-4 flex flex-wrap gap-2">
-        {tips.map((n) => (
-          <a
-            key={n}
-            href={`/pay?tab=tip&amount=${n}`}
-            className={`inline-flex min-h-11 min-w-16 items-center justify-center border px-3 py-2 text-sm ${
-              selected === n ? "border-brand bg-brand" : "border-white/20"
-            }`}
-          >
-            {money(n)}
-          </a>
-        ))}
-      </div>
-      <CheckoutForm
-        amount={selected}
-        label="Send tip"
-        kind="tip"
-        error={error}
-      />
+      <form action={demoPay} className="pay-form mt-4 space-y-3">
+        <input type="hidden" name="kind" value="tip" />
+        <div className="flex flex-wrap gap-2">
+          {tips.map((n) => (
+            <label key={n} className="pay-choice">
+              <input
+                type="radio"
+                name="amount"
+                value={n}
+                defaultChecked={n === 10}
+                className="pay-choice-input"
+              />
+              {money(n)}
+            </label>
+          ))}
+        </div>
+        <CardFields kind="tip" error={error} />
+        <button
+          type="submit"
+          className="inline-flex h-12 w-full items-center justify-center bg-brand text-[12px] tracking-[0.18em] text-white"
+        >
+          SEND TIP ·{" "}
+          {tips.map((n) => (
+            <span key={n} className="pay-live-amount" data-value={String(n)}>
+              {money(n)}
+            </span>
+          ))}
+        </button>
+      </form>
     </div>
   )
 }
 
 function DepositCheckout({
-  offerParam,
   paid,
   error,
 }: {
-  offerParam?: string
   paid?: string
   error?: boolean
 }) {
   if (paid) {
-    return <PaidNotice amount={Number(paid)} href="/pay?tab=book" />
+    return <PaidNotice amount={Number(paid)} />
   }
-  const offerId = offerParam ?? bookingOffers[0].id
-  const offer = bookingOffers.find((o) => o.id === offerId) ?? bookingOffers[0]
   return (
     <div className="panel p-5">
-      <div className="grid gap-2">
-        {bookingOffers.map((o) => (
-          <a
-            key={o.id}
-            href={`/pay?tab=book&offer=${o.id}`}
-            className={`border px-3 py-3 text-left ${
-              offer.id === o.id ? "border-brand" : "border-white/15"
-            }`}
-          >
-            <p className="text-sm font-semibold tracking-wide">{o.title}</p>
-            <p className="text-xs text-white/50">
-              {o.price} · deposit {money(o.deposit)}
-            </p>
-          </a>
-        ))}
-      </div>
-      <CheckoutForm
-        amount={offer.deposit}
-        label="Pay deposit"
-        kind="book"
-        error={error}
-      />
+      <form action={demoPay} className="pay-form space-y-3">
+        <input type="hidden" name="kind" value="book" />
+        <div className="grid gap-2">
+          {bookingOffers.map((o, index) => (
+            <label key={o.id} className="pay-offer">
+              <input
+                type="radio"
+                name="offer"
+                value={o.id}
+                defaultChecked={index === 0}
+                className="pay-choice-input"
+              />
+              <span>
+                <span className="block text-sm font-semibold tracking-wide">
+                  {o.title}
+                </span>
+                <span className="block text-xs text-white/50 pay-offer-meta">
+                  {o.price} · deposit {money(o.deposit)}
+                </span>
+              </span>
+            </label>
+          ))}
+        </div>
+        <CardFields kind="book" error={error} />
+        <button
+          type="submit"
+          className="inline-flex h-12 w-full items-center justify-center bg-brand text-[12px] tracking-[0.18em] text-white"
+        >
+          PAY DEPOSIT ·{" "}
+          {bookingOffers.map((o) => (
+            <span key={o.id} className="pay-live-amount" data-value={o.id}>
+              {money(o.deposit)}
+            </span>
+          ))}
+        </button>
+      </form>
     </div>
   )
 }
 
-function PaidNotice({ amount, href }: { amount: number; href: string }) {
+function PaidNotice({ amount }: { amount: number }) {
   return (
     <div className="panel p-5">
       <p className="font-display text-3xl tracking-[0.1em]">PAID.</p>
@@ -271,7 +281,7 @@ function PaidNotice({ amount, href }: { amount: number; href: string }) {
         attached yet.
       </p>
       <a
-        href={href}
+        href="/pay"
         className="mt-4 inline-flex h-12 items-center bg-brand px-5 text-[12px] tracking-[0.18em] text-white"
       >
         RUN ANOTHER
@@ -296,6 +306,20 @@ function CheckoutForm({
     <form action={demoPay} className="mt-6 space-y-3">
       <input type="hidden" name="kind" value={kind} />
       <input type="hidden" name="amount" value={amount} />
+      <CardFields kind={kind} error={error} />
+      <button
+        type="submit"
+        className="inline-flex h-12 w-full items-center justify-center bg-brand text-[12px] tracking-[0.18em] text-white"
+      >
+        {`${label.toUpperCase()} · ${pretty}`}
+      </button>
+    </form>
+  )
+}
+
+function CardFields({ kind, error }: { kind: string; error?: boolean }) {
+  return (
+    <>
       <div className="grid gap-3 sm:grid-cols-2">
         <div>
           <Label htmlFor={`${kind}-cardname`}>Name on card</Label>
@@ -341,12 +365,6 @@ function CheckoutForm({
           Name and a card number (demo — any 12+ digits).
         </p>
       ) : null}
-      <button
-        type="submit"
-        className="inline-flex h-12 w-full items-center justify-center bg-brand text-[12px] tracking-[0.18em] text-white"
-      >
-        {`${label.toUpperCase()} · ${pretty}`}
-      </button>
-    </form>
+    </>
   )
 }
