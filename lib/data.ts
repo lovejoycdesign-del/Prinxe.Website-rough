@@ -221,8 +221,25 @@ export const merch: MerchItem[] = [
     image: "/images/merch-hoodie.jpg",
     tag: "CORE DROP",
     description:
-      "Vintage-black washed hoodie. Forever Searching face print up front, eclipse and wings on the back. Never settling.",
+      "Washed hoodie in black, grey, or white. Forever Searching face print up front, eclipse and wings on the back. Never settling.",
     sizes: ["S", "M", "L", "XL", "2XL"],
+    colors: [
+      {
+        id: "black",
+        label: "BLACK",
+        image: "/images/merch-hoodie.jpg",
+      },
+      {
+        id: "grey",
+        label: "GREY",
+        image: "/images/merch-hoodie-grey-drop.png",
+      },
+      {
+        id: "white",
+        label: "WHITE",
+        image: "/images/merch-hoodie-white-drop.png",
+      },
+    ],
   },
   {
     slug: "real-ones-sweatpants",
@@ -258,8 +275,25 @@ export const merch: MerchItem[] = [
     image: "/images/merch-sweatsuit-drop.png",
     tag: "THE SUIT",
     description:
-      "Hoodie and sweatpants together. Built Different circle up front, BD Clothing globe on the back. One bag, one look.",
+      "Hoodie and sweatpants together in black, grey, or white. Built Different circle up front, BD Clothing globe on the back. One bag, one look.",
     sizes: ["S", "M", "L", "XL", "2XL"],
+    colors: [
+      {
+        id: "black",
+        label: "BLACK",
+        image: "/images/merch-sweatsuit-drop.png",
+      },
+      {
+        id: "grey",
+        label: "GREY",
+        image: "/images/merch-sweatsuit-grey-drop.png",
+      },
+      {
+        id: "white",
+        label: "WHITE",
+        image: "/images/merch-sweatsuit-white-drop.png",
+      },
+    ],
   },
   {
     slug: "stencil-tee",
@@ -268,8 +302,25 @@ export const merch: MerchItem[] = [
     image: "/images/merch-tee.jpg",
     tag: "ESSENTIAL",
     description:
-      "Black work shirt. Quiet mark on the chest, Built Different globe print on the back. More than clothes.",
+      "Work shirt in black, grey, or white. Quiet mark on the chest, Built Different globe print on the back. More than clothes.",
     sizes: ["S", "M", "L", "XL", "2XL"],
+    colors: [
+      {
+        id: "black",
+        label: "BLACK",
+        image: "/images/merch-tee.jpg",
+      },
+      {
+        id: "grey",
+        label: "GREY",
+        image: "/images/merch-tee-grey-drop.png",
+      },
+      {
+        id: "white",
+        label: "WHITE",
+        image: "/images/merch-tee-white-drop.png",
+      },
+    ],
   },
   {
     slug: "real-ones-shorts",
@@ -278,8 +329,25 @@ export const merch: MerchItem[] = [
     image: "/images/merch-shorts-drop.png",
     tag: "NEW DROP",
     description:
-      "Heavyweight black french terry shorts. Forever Searching face print up front, eclipse and wings on the back.",
+      "Heavyweight french terry shorts in black, grey, or white. Forever Searching face print up front, eclipse and wings on the back.",
     sizes: ["S", "M", "L", "XL", "2XL"],
+    colors: [
+      {
+        id: "black",
+        label: "BLACK",
+        image: "/images/merch-shorts-drop.png",
+      },
+      {
+        id: "grey",
+        label: "GREY",
+        image: "/images/merch-shorts-grey-drop.png",
+      },
+      {
+        id: "white",
+        label: "WHITE",
+        image: "/images/merch-shorts-white-drop.png",
+      },
+    ],
   },
   {
     slug: "fitted-cap",
