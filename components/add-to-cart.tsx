@@ -9,13 +9,14 @@ import { Button } from "@/components/ui/button"
 export function AddToCart({
   item,
   optionLabel,
+  groupName,
 }: {
   item: MerchItem
   optionLabel?: string
+  groupName?: string
 }) {
   const { add } = useCart()
   const [size, setSize] = useState(item.sizes[2] ?? item.sizes[0])
-  const lineSize = optionLabel ? `${optionLabel} · ${size}` : size
 
   return (
     <div className="space-y-4">
@@ -41,11 +42,19 @@ export function AddToCart({
       <Button
         className="h-12 w-full rounded-none bg-brand text-[12px] tracking-[0.2em]"
         onClick={() => {
+          const checked = groupName
+            ? document.querySelector<HTMLInputElement>(
+                `input[name="${CSS.escape(groupName)}"]:checked`
+              )
+            : null
+          const chosenLabel = checked?.dataset.label ?? optionLabel
+          const chosenImage = checked?.dataset.image ?? item.image
+          const lineSize = chosenLabel ? `${chosenLabel} · ${size}` : size
           add({
             slug: item.slug,
             title: item.title,
             price: item.price,
-            image: item.image,
+            image: chosenImage,
             size: lineSize,
           })
           toast.success(`${item.title} · ${lineSize} added to bag.`)

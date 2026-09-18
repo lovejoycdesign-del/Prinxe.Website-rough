@@ -131,3 +131,112 @@
   height: 2px;
   background: #c4161c;
 }
+
+.merch-switch-input {
+  position: absolute;
+  grid-area: 1 / 1;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.merch-switch-frame {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.merch-layer {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.merch-layer:first-of-type {
+  opacity: 1;
+}
+
+.merch-switch-frame--contain .merch-layer {
+  object-fit: contain;
+}
+
+.merch-switch-photo-link {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.merch-switch-controls {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.merch-switch-label {
+  position: relative;
+  z-index: 20;
+  display: inline-flex;
+  min-height: 2.75rem;
+  min-width: 6rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.625rem 1rem;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.7);
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.merch-switch-label:hover {
+  border-color: #fff;
+  color: #fff;
+}
+
+.merch-switch > .merch-switch-input:checked ~ .merch-switch-frame .merch-layer,
+.merch-switch:has(input:checked) .merch-layer {
+  opacity: 0;
+}
+
+.merch-switch > .merch-switch-input[value="beanie"]:checked ~ .merch-switch-frame .merch-layer[data-option="beanie"],
+.merch-switch > .merch-switch-input[value="hat"]:checked ~ .merch-switch-frame .merch-layer[data-option="hat"],
+.merch-switch > .merch-switch-input[value="black"]:checked ~ .merch-switch-frame .merch-layer[data-option="black"],
+.merch-switch > .merch-switch-input[value="grey"]:checked ~ .merch-switch-frame .merch-layer[data-option="grey"],
+.merch-switch > .merch-switch-input[value="white"]:checked ~ .merch-switch-frame .merch-layer[data-option="white"],
+.merch-switch:has(input[value="beanie"]:checked) .merch-layer[data-option="beanie"],
+.merch-switch:has(input[value="hat"]:checked) .merch-layer[data-option="hat"],
+.merch-switch:has(input[value="black"]:checked) .merch-layer[data-option="black"],
+.merch-switch:has(input[value="grey"]:checked) .merch-layer[data-option="grey"],
+.merch-switch:has(input[value="white"]:checked) .merch-layer[data-option="white"] {
+  opacity: 1;
+}
+
+.merch-switch > .merch-switch-input[value="beanie"]:checked ~ * .merch-switch-label[data-option="beanie"],
+.merch-switch > .merch-switch-input[value="hat"]:checked ~ * .merch-switch-label[data-option="hat"],
+.merch-switch > .merch-switch-input[value="black"]:checked ~ * .merch-switch-label[data-option="black"],
+.merch-switch > .merch-switch-input[value="grey"]:checked ~ * .merch-switch-label[data-option="grey"],
+.merch-switch > .merch-switch-input[value="white"]:checked ~ * .merch-switch-label[data-option="white"],
+.merch-switch-label:has(+ .merch-switch-input:checked),
+.merch-switch:has(input[value="beanie"]:checked) .merch-switch-label[data-option="beanie"],
+.merch-switch:has(input[value="hat"]:checked) .merch-switch-label[data-option="hat"],
+.merch-switch:has(input[value="black"]:checked) .merch-switch-label[data-option="black"],
+.merch-switch:has(input[value="grey"]:checked) .merch-switch-label[data-option="grey"],
+.merch-switch:has(input[value="white"]:checked) .merch-switch-label[data-option="white"] {
+  border-color: #c4161c;
+  background: #c4161c;
+  color: #fff;
+}
