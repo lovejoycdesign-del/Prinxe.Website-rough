@@ -12,9 +12,10 @@ The homepage follows the artist preview: distressed wordmark, blood-red CTAs, *C
 | `/videos` | Music videos. *Crazy* is live. Add more YouTube links in the browser. |
 | `/music` | Catalog. Add songs and paste Spotify / Apple / YouTube / SoundCloud / Tidal URLs. |
 | `/merch` | Store. Hoodie, tee, cap, shorts. |
+| `/bag` | Shopping bag — every piece you add, with quantity and checkout |
 | `/contact` | Artist (empty) and manager LJ Chirombo. |
 | `/about` | Artist story |
-| `/pay` | Payment / The Bag — Cash App `$Daprinxe12` QR, plus a demo merch till |
+| `/pay` | Payment — Cash App `$Daprinxe12` QR, plus a demo merch till |
 | `/inbox` | Fan DMs |
 | `/join` | Real Ones list |
 | `/book` | Shows, features, sessions |

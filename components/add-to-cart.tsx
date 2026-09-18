@@ -62,10 +62,10 @@ export function AddToCart({
         ADD TO BAG · {money(item.price)}
       </button>
       <a
-        href="/pay"
+        href="/bag"
         className="inline-flex h-12 w-full items-center justify-center border border-white/25 text-[12px] tracking-[0.2em] text-white hover:border-white"
       >
-        GO TO CHECKOUT →
+        VIEW BAG →
       </a>
     </form>
   )

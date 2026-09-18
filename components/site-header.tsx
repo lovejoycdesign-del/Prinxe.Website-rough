@@ -66,18 +66,21 @@ export function SiteHeader() {
             })}
           </div>
 
-          <Link
-            href="/pay"
-            className="relative text-white/80 hover:text-white"
-            aria-label="Bag"
+          <a
+            href="/bag"
+            className={cn(
+              "relative grid size-11 place-items-center text-white/80 hover:text-white",
+              pathname === "/bag" && "text-brand"
+            )}
+            aria-label={count > 0 ? `Bag, ${count} items` : "Bag"}
           >
-            <ShoppingBag className="size-4" />
+            <ShoppingBag className="size-5" />
             {count > 0 ? (
-              <span className="absolute -right-2 -top-2 grid size-4 place-items-center rounded-full bg-brand text-[9px] font-bold text-white">
+              <span className="absolute right-1 top-1 grid size-4 place-items-center rounded-full bg-brand text-[9px] font-bold text-white">
                 {count}
               </span>
             ) : null}
-          </Link>
+          </a>
 
           <Link
             href="/join"

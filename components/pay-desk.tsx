@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation"
 import { toast } from "sonner"
 import { bookingOffers, cashApp, money } from "@/lib/data"
 import { useCart } from "@/hooks/use-cart"
+import { BagEmpty, BagLines } from "@/components/bag-lines"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -99,7 +100,7 @@ function CashAppPay() {
 }
 
 function BagCheckout() {
-  const { items, total, setQty, remove, clear, ready } = useCart()
+  const { items, total, clear, ready } = useCart()
   const [receipt, setReceipt] = useState<number | null>(null)
 
   if (!ready) {
@@ -130,60 +131,11 @@ function BagCheckout() {
   }
 
   if (items.length === 0) {
-    return (
-      <Empty
-        title="BAG IS EMPTY"
-        copy="The Real Ones hoodie is waiting."
-        href="/merch"
-        cta="SHOP MERCH"
-      />
-    )
+    return <BagEmpty />
   }
   return (
     <div className="panel p-5">
-      <ul className="space-y-4">
-        {items.map((line) => (
-          <li key={`${line.slug}-${line.size}`} className="flex gap-3">
-            <Image
-              src={line.image}
-              alt=""
-              width={64}
-              height={64}
-              className="size-16 object-cover"
-            />
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-semibold tracking-wide">{line.title}</p>
-              <p className="text-xs text-white/45">
-                {line.size} · {money(line.price)}
-              </p>
-              <div className="mt-2 flex items-center gap-2">
-                <button
-                  type="button"
-                  className="size-7 border border-white/20"
-                  onClick={() => setQty(line.slug, line.size, line.qty - 1)}
-                >
-                  −
-                </button>
-                <span className="w-6 text-center text-sm">{line.qty}</span>
-                <button
-                  type="button"
-                  className="size-7 border border-white/20"
-                  onClick={() => setQty(line.slug, line.size, line.qty + 1)}
-                >
-                  +
-                </button>
-                <button
-                  type="button"
-                  className="ml-2 text-[10px] tracking-[0.14em] text-white/40"
-                  onClick={() => remove(line.slug, line.size)}
-                >
-                  REMOVE
-                </button>
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <BagLines />
       <p className="mt-6 text-right font-display text-3xl tracking-wide">
         {money(total)}
       </p>
@@ -374,30 +326,5 @@ function CheckoutForm({
         {status === "loading" ? "PROCESSING…" : `${label.toUpperCase()} · ${pretty}`}
       </button>
     </form>
-  )
-}
-
-function Empty({
-  title,
-  copy,
-  href,
-  cta,
-}: {
-  title: string
-  copy: string
-  href: string
-  cta: string
-}) {
-  return (
-    <div className="panel p-10 text-center">
-      <p className="font-display text-3xl tracking-[0.1em]">{title}</p>
-      <p className="mt-2 text-sm text-white/50">{copy}</p>
-      <a
-        href={href}
-        className="mt-6 inline-flex bg-brand px-4 py-2 text-[11px] tracking-[0.16em]"
-      >
-        {cta}
-      </a>
-    </div>
   )
 }

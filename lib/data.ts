@@ -105,6 +105,7 @@ export const nav = [
 ]
 
 export const extraNav = [
+  { href: "/bag", label: "BAG" },
   { href: "/inbox", label: "FAN DM" },
   { href: "/book", label: "BOOK" },
   { href: "/join", label: "JOIN" },
