@@ -6,25 +6,27 @@ import {
   useMemo,
   type ReactNode,
 } from "react"
-import { merch } from "@/lib/data"
-import { KEYS } from "@/lib/storage"
+import { KEYS, readStore, writeStore } from "@/lib/storage"
 import { usePersistentState } from "@/hooks/use-persistent-state"
+import {
+  cartLineKey,
+  merchSelectionToLine,
+  type CartLine,
+} from "@/lib/cart-line"
 
-export type CartLine = {
-  slug: string
-  title: string
-  price: number
-  image: string
-  size: string
-  qty: number
-}
+export type { CartLine }
 
 type CartContextValue = {
   items: CartLine[]
   ready: boolean
   add: (item: Omit<CartLine, "qty">, qty?: number) => void
-  setQty: (slug: string, size: string, qty: number) => void
-  remove: (slug: string, size: string) => void
+  addSelection: (
+    slug: string,
+    optionId?: string | null,
+    size?: string | null
+  ) => boolean
+  setQty: (key: string, qty: number) => void
+  remove: (key: string) => void
   clear: () => void
   count: number
   total: number
@@ -39,41 +41,51 @@ export function CartProvider({ children }: { children: ReactNode }) {
   )
 
   const value = useMemo<CartContextValue>(() => {
+    const commit = (next: CartLine[]) => {
+      writeStore(KEYS.cart, next)
+      setItems(next)
+    }
+
     const add: CartContextValue["add"] = (item, qty = 1) => {
-      const product = merch.find((p) => p.slug === item.slug)
-      if (!product) return
-      setItems((prev) => {
-        const i = prev.findIndex(
-          (line) => line.slug === item.slug && line.size === item.size
-        )
-        if (i >= 0) {
-          return prev.map((line, idx) =>
-            idx === i ? { ...line, qty: line.qty + qty } : line
-          )
-        }
-        return [...prev, { ...item, qty }]
-      })
+      if (!merchSelectionToLine(item.slug)) return
+      const prev = readStore<CartLine[]>(KEYS.cart, [])
+      const i = prev.findIndex(
+        (line) => cartLineKey(line) === cartLineKey(item)
+      )
+      const next =
+        i >= 0
+          ? prev.map((line, idx) =>
+              idx === i ? { ...line, qty: line.qty + qty } : line
+            )
+          : [...prev, { ...item, qty }]
+      commit(next)
     }
 
     return {
       items,
       ready,
       add,
-      setQty: (slug, size, qty) =>
-        setItems((prev) =>
+      addSelection: (slug, optionId, size) => {
+        const line = merchSelectionToLine(slug, optionId, size)
+        if (!line) return false
+        add(line)
+        return true
+      },
+      setQty: (key, qty) => {
+        const prev = readStore<CartLine[]>(KEYS.cart, [])
+        const next =
           qty <= 0
-            ? prev.filter((line) => !(line.slug === slug && line.size === size))
+            ? prev.filter((line) => cartLineKey(line) !== key)
             : prev.map((line) =>
-                line.slug === slug && line.size === size
-                  ? { ...line, qty }
-                  : line
+                cartLineKey(line) === key ? { ...line, qty } : line
               )
-        ),
-      remove: (slug, size) =>
-        setItems((prev) =>
-          prev.filter((line) => !(line.slug === slug && line.size === size))
-        ),
-      clear: () => setItems([]),
+        commit(next)
+      },
+      remove: (key) => {
+        const prev = readStore<CartLine[]>(KEYS.cart, [])
+        commit(prev.filter((line) => cartLineKey(line) !== key))
+      },
+      clear: () => commit([]),
       count: items.reduce((n, line) => n + line.qty, 0),
       total: items.reduce((n, line) => n + line.price * line.qty, 0),
     }

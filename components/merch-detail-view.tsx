@@ -1,6 +1,7 @@
 import { money, type MerchItem } from "@/lib/data"
 import { AddToCart } from "@/components/add-to-cart"
 import {
+  BUY_FORM_ID,
   MerchOptionNames,
   MerchPictureStack,
   MerchRadios,
@@ -12,7 +13,6 @@ export function MerchDetailView({ item }: { item: MerchItem }) {
   const colorOptions = item.colors ?? []
   const options = styleOptions.length ? styleOptions : colorOptions
   const optionKind = colorOptions.length && !styleOptions.length ? "COLOR" : null
-  const groupName = `detail-${item.slug}`
 
   const info = (
     <div className="flex flex-col justify-center">
@@ -27,18 +27,14 @@ export function MerchDetailView({ item }: { item: MerchItem }) {
       {options.length > 0 ? (
         <div className="mt-6">
           <MerchOptionNames
-            name={groupName}
+            name="option"
             options={options}
             heading={optionKind ?? undefined}
           />
         </div>
       ) : null}
       <div className="mt-8">
-        <AddToCart
-          item={item}
-          groupName={options.length ? groupName : undefined}
-          optionLabel={options[0]?.label}
-        />
+        <AddToCart item={item} />
       </div>
     </div>
   )
@@ -60,7 +56,7 @@ export function MerchDetailView({ item }: { item: MerchItem }) {
 
   return (
     <MerchSwitch className="mx-auto grid max-w-5xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-2">
-      <MerchRadios name={groupName} options={options} />
+      <MerchRadios name="option" options={options} form={BUY_FORM_ID} />
       <MerchPictureStack
         options={options}
         fit="contain"

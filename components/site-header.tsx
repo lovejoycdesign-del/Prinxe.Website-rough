@@ -69,14 +69,17 @@ export function SiteHeader() {
           <a
             href="/bag"
             className={cn(
-              "relative grid size-11 place-items-center text-white/80 hover:text-white",
+              "relative inline-flex h-11 min-w-11 items-center justify-center gap-2 px-2 text-white/80 hover:text-white",
               pathname === "/bag" && "text-brand"
             )}
             aria-label={count > 0 ? `Bag, ${count} items` : "Bag"}
           >
             <ShoppingBag className="size-5" />
+            <span className="hidden text-[11px] font-semibold tracking-[0.18em] sm:inline">
+              BAG
+            </span>
             {count > 0 ? (
-              <span className="absolute right-1 top-1 grid size-4 place-items-center rounded-full bg-brand text-[9px] font-bold text-white">
+              <span className="absolute right-0 top-1 grid size-4 place-items-center rounded-full bg-brand text-[9px] font-bold text-white sm:right-1">
                 {count}
               </span>
             ) : null}

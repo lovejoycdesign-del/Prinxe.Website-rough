@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Suspense } from "react"
 import { PageBand } from "@/components/page-band"
 import { BagView } from "@/components/bag-view"
 
@@ -13,9 +14,17 @@ export default function BagPage() {
       <PageBand
         kicker="YOUR PIECES"
         title="BAG"
-        copy="Everything you add lands here. Change the count, drop a piece, or take it to checkout when the bag is right."
+        copy="Everything you add lands here — color, size, and count. Drop a piece or take it to checkout when the bag is right."
       />
-      <BagView />
+      <Suspense
+        fallback={
+          <p className="px-4 py-16 text-center text-sm text-white/50">
+            Opening the bag…
+          </p>
+        }
+      >
+        <BagView />
+      </Suspense>
     </div>
   )
 }

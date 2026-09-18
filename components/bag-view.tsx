@@ -1,11 +1,24 @@
 "use client"
 
+import { useEffect, useRef } from "react"
+import { useSearchParams } from "next/navigation"
 import { money } from "@/lib/data"
 import { useCart } from "@/hooks/use-cart"
 import { BagEmpty, BagLines } from "@/components/bag-lines"
 
 export function BagView() {
-  const { items, total, ready, count } = useCart()
+  const params = useSearchParams()
+  const { items, total, ready, count, addSelection } = useCart()
+  const absorbed = useRef(false)
+
+  useEffect(() => {
+    if (!ready || absorbed.current) return
+    const slug = params.get("slug")
+    if (!slug) return
+    absorbed.current = true
+    addSelection(slug, params.get("option"), params.get("size"))
+    window.history.replaceState(window.history.state, "", "/bag")
+  }, [addSelection, params, ready])
 
   if (!ready) {
     return (

@@ -2,6 +2,8 @@ import type { ReactNode } from "react"
 import type { MerchVariant } from "@/lib/data"
 import { cn } from "@/lib/utils"
 
+export const BUY_FORM_ID = "merch-buy"
+
 export function MerchSwitch({
   className,
   children,
@@ -15,9 +17,11 @@ export function MerchSwitch({
 export function MerchRadios({
   name,
   options,
+  form,
 }: {
   name: string
   options: MerchVariant[]
+  form?: string
 }) {
   return (
     <>
@@ -28,6 +32,7 @@ export function MerchRadios({
           type="radio"
           name={name}
           value={option.id}
+          form={form}
           defaultChecked={index === 0}
           data-label={option.label}
           data-image={option.image}

@@ -21,6 +21,7 @@ export function PayDesk() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
       <CashAppPay />
+      <BagShortcut />
       <p className="mb-6 text-xs text-white/45">
         Merch and booking deposits below are a demo till — no card is processed.
         Real tips go through Cash App.
@@ -96,6 +97,23 @@ function CashAppPay() {
         </a>
       </div>
     </div>
+  )
+}
+
+function BagShortcut() {
+  const { count, ready } = useCart()
+  return (
+    <a
+      href="/bag"
+      className="mb-8 flex h-12 items-center justify-between border border-white/20 px-4 text-[12px] tracking-[0.18em] text-white hover:border-white"
+    >
+      <span>YOUR BAG</span>
+      <span>
+        {ready && count > 0
+          ? `${count} ${count === 1 ? "PIECE" : "PIECES"} →`
+          : "VIEW →"}
+      </span>
+    </a>
   )
 }
 
