@@ -20,16 +20,8 @@ export function MerchOptionButtons({
             key={option.id}
             type="button"
             aria-pressed={selected}
-            onPointerDown={(event) => {
-              event.preventDefault()
-              event.stopPropagation()
-            }}
-            onClick={(event) => {
-              event.preventDefault()
-              event.stopPropagation()
-              onChange(option.id)
-            }}
-            className={`min-w-20 border px-3 py-2 text-[10px] tracking-[0.16em] ${
+            onClick={() => onChange(option.id)}
+            className={`min-h-11 min-w-24 border px-4 py-2.5 text-[11px] tracking-[0.16em] ${
               selected
                 ? "border-brand bg-brand text-white"
                 : "border-white/20 text-white/70 hover:border-white"

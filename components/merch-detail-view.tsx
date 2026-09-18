@@ -12,7 +12,7 @@ export function MerchDetailView({ item }: { item: MerchItem }) {
   const options = styleOptions.length ? styleOptions : colorOptions
   const optionKind = colorOptions.length && !styleOptions.length ? "COLOR" : null
   const [activeId, setActiveId] = useState(options[0]?.id ?? "")
-  const active = options.find((o) => o.id === activeId) ?? options[0]
+  const active = options.find((option) => option.id === activeId) ?? options[0]
   const selected: MerchItem = {
     ...item,
     title: styleOptions.length ? (active?.label ?? item.title) : item.title,
@@ -23,6 +23,7 @@ export function MerchDetailView({ item }: { item: MerchItem }) {
     <div className="mx-auto grid max-w-5xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-2">
       <div className="relative aspect-[4/3] overflow-hidden bg-black ring-1 ring-white/10">
         <img
+          key={selected.image}
           src={selected.image}
           alt={`${item.title}${active?.label ? ` · ${active.label}` : ""}`}
           className="h-full w-full object-contain"

@@ -8,7 +8,7 @@ import { MerchOptionButtons } from "@/components/merch-option-buttons"
 export function MerchOptionCard({ item }: { item: MerchItem }) {
   const options = item.variants ?? []
   const [activeId, setActiveId] = useState(options[0]?.id ?? "")
-  const active = options.find((o) => o.id === activeId) ?? options[0]
+  const active = options.find((option) => option.id === activeId) ?? options[0]
   const image = active?.image ?? item.image
   const label = active?.label ?? item.title
 
@@ -17,6 +17,7 @@ export function MerchOptionCard({ item }: { item: MerchItem }) {
       <Link href={`/merch/${item.slug}`} className="group block">
         <div className="relative aspect-[3/2] bg-black">
           <img
+            key={image}
             src={image}
             alt={label}
             className="h-full w-full object-cover"
