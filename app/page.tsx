@@ -192,7 +192,10 @@ export default function HomePage() {
               </div>
               <div>
                 <p className="text-[11px] tracking-[0.18em] text-brand">MANAGER</p>
-                <p className="mt-1 font-medium">{contacts.manager.name}</p>
+                <p className="mt-1 font-medium">
+                  {contacts.manager.heading || contacts.manager.name}
+                </p>
+                <p className="text-white/70">{contacts.manager.name}</p>
                 <a
                   href={`mailto:${contacts.manager.email}`}
                   className="block text-white/70 hover:text-brand"
