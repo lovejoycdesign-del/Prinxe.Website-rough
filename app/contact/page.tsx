@@ -14,7 +14,7 @@ export default function ContactPage() {
       <PageBand
         kicker="THE LINE"
         title="CONTACT"
-        copy="Artist name is on the card. Email and phone stay blank until he drops them. Management is the other line."
+        copy="Artist line and management line. Emails open in your mail app."
       />
       <div className="mx-auto max-w-5xl space-y-10 px-4 py-12 sm:px-6">
         <div className="grid gap-4 md:grid-cols-2">
@@ -31,6 +31,7 @@ function ContactCard({
   person,
 }: {
   person: {
+    heading?: string
     name: string
     role: string
     email: string
@@ -42,7 +43,7 @@ function ContactCard({
     <article className="panel p-6">
       <p className="text-[11px] tracking-[0.22em] text-brand">{person.role.toUpperCase()}</p>
       <h2 className="font-display mt-2 text-4xl tracking-[0.08em] text-white">
-        {person.name || "—"}
+        {person.heading || person.name || "—"}
       </h2>
       <dl className="mt-6 space-y-4 text-sm">
         <Field label="Name" value={person.name} />

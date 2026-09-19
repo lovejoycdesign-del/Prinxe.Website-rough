@@ -173,14 +173,32 @@ export default function HomePage() {
             <div className="space-y-5 text-sm">
               <div>
                 <p className="text-[11px] tracking-[0.18em] text-brand">ARTIST</p>
-                <p className="mt-1 font-medium">{contacts.artist.name || "Name —"}</p>
-                <p className="text-white/35">Email —</p>
-                <p className="text-white/35">Phone —</p>
+                <p className="mt-1 font-medium">
+                  {contacts.artist.heading || contacts.artist.name}
+                </p>
+                <p className="text-white/70">{contacts.artist.name}</p>
+                <a
+                  href={`mailto:${contacts.artist.email}`}
+                  className="block text-white/70 hover:text-brand"
+                >
+                  {contacts.artist.email}
+                </a>
+                <a
+                  href={`tel:${contacts.artist.phone.replace(/\D/g, "")}`}
+                  className="block text-white/70 hover:text-brand"
+                >
+                  {contacts.artist.phone}
+                </a>
               </div>
               <div>
                 <p className="text-[11px] tracking-[0.18em] text-brand">MANAGER</p>
                 <p className="mt-1 font-medium">{contacts.manager.name}</p>
-                <p className="text-white/70">{contacts.manager.email}</p>
+                <a
+                  href={`mailto:${contacts.manager.email}`}
+                  className="block text-white/70 hover:text-brand"
+                >
+                  {contacts.manager.email}
+                </a>
                 <p className="text-white/70">{contacts.manager.phone}</p>
                 <p className="text-white/70">{contacts.manager.location}</p>
               </div>

@@ -48,6 +48,7 @@ export type MerchItem = {
 }
 
 export type ContactCard = {
+  heading?: string
   name: string
   role: string
   email: string
@@ -375,14 +376,15 @@ export const merch: MerchItem[] = [
 
 export const contacts = {
   artist: {
-    name: "Daprinxe",
+    heading: "Daprinxe",
+    name: "Brelyn Williams",
     role: "Artist",
-    email: "",
-    phone: "",
-    location: "",
+    email: "Daprinxe122@icloud.com",
+    phone: "443-669-9897",
+    location: "DMV",
   } satisfies ContactCard,
   manager: {
-    name: "LJ Chirombo",
+    name: "Chirombo Inc.",
     role: "Manager",
     email: "lovejoyc.design@gmail.com",
     phone: "410-699-7677",
