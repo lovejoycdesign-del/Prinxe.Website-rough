@@ -4,8 +4,10 @@ import { bagCount, bagTotal } from "@/lib/bag-cookie"
 import type { CartLine } from "@/lib/cart-line"
 import { BagEmpty, BagLines } from "@/components/bag-lines"
 import { NativePostForm } from "@/components/native-post-form"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+
+const cardInputClass =
+  "mt-1 h-10 w-full rounded-none border border-input bg-transparent px-2.5 text-base text-white outline-none placeholder:text-white/35 focus-visible:border-ring"
 
 const tips = [5, 10, 25, 50]
 
@@ -45,7 +47,7 @@ export function PayDesk({
           id="pay-tab-bag"
           className="pay-tab-input"
           type="radio"
-          name="pay-tab"
+          name="pay-surface"
           value="bag"
           defaultChecked={tab === "bag"}
         />
@@ -53,7 +55,7 @@ export function PayDesk({
           id="pay-tab-tip"
           className="pay-tab-input"
           type="radio"
-          name="pay-tab"
+          name="pay-surface"
           value="tip"
           defaultChecked={tab === "tip"}
         />
@@ -61,7 +63,7 @@ export function PayDesk({
           id="pay-tab-book"
           className="pay-tab-input"
           type="radio"
-          name="pay-tab"
+          name="pay-surface"
           value="book"
           defaultChecked={tab === "book"}
         />
@@ -323,40 +325,49 @@ function CardFields({ kind, error }: { kind: string; error?: boolean }) {
       <div className="grid gap-3 sm:grid-cols-2">
         <div>
           <Label htmlFor={`${kind}-cardname`}>Name on card</Label>
-          <Input
+          <input
             id={`${kind}-cardname`}
             name="cardname"
-            className="mt-1 h-10 rounded-none"
+            className={cardInputClass}
             placeholder="REAL ONE"
+            defaultValue="REAL ONE"
+            autoComplete="cc-name"
           />
         </div>
         <div>
           <Label htmlFor={`${kind}-card`}>Card number</Label>
-          <Input
+          <input
             id={`${kind}-card`}
             name="card"
-            className="mt-1 h-10 rounded-none"
+            inputMode="numeric"
+            className={cardInputClass}
             placeholder="4242 4242 4242 4242"
+            defaultValue="4242 4242 4242 4242"
+            autoComplete="cc-number"
           />
         </div>
       </div>
       <div className="grid grid-cols-2 gap-3">
         <div>
           <Label htmlFor={`${kind}-exp`}>Exp</Label>
-          <Input
+          <input
             id={`${kind}-exp`}
             name="exp"
             placeholder="09/28"
-            className="mt-1 h-10 rounded-none"
+            defaultValue="09/28"
+            className={cardInputClass}
+            autoComplete="cc-exp"
           />
         </div>
         <div>
           <Label htmlFor={`${kind}-cvc`}>CVC</Label>
-          <Input
+          <input
             id={`${kind}-cvc`}
             name="cvc"
             placeholder="123"
-            className="mt-1 h-10 rounded-none"
+            defaultValue="123"
+            className={cardInputClass}
+            autoComplete="cc-csc"
           />
         </div>
       </div>

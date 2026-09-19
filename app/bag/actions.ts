@@ -47,17 +47,23 @@ export async function removeBagItem(formData: FormData) {
 }
 
 export async function demoPay(formData: FormData) {
-  const name = String(formData.get("cardname") ?? "").trim()
-  const number = String(formData.get("card") ?? "").replace(/\s/g, "")
+  const name = String(formData.get("cardname") ?? formData.get("name") ?? "").trim()
+  const number = String(
+    formData.get("card") ?? formData.get("cardnumber") ?? ""
+  ).replace(/[\s-]/g, "")
   const kind = String(formData.get("kind") ?? "bag")
   const offer = bookingOffers.find(
     (item) => item.id === String(formData.get("offer") ?? "")
   )
-  const amount =
+  const items = await getBagItems()
+  const tab = kind === "tip" || kind === "book" ? kind : "bag"
+  let amount =
     kind === "book" && offer
       ? offer.deposit
       : Number(formData.get("amount") ?? 0)
-  const tab = kind === "tip" || kind === "book" ? kind : "bag"
+  if (!(amount > 0) && tab === "bag") {
+    amount = items.reduce((n, line) => n + line.price * line.qty, 0)
+  }
   if (!name || number.length < 12 || !(amount > 0)) {
     redirect(`/pay?tab=${tab}&error=1`)
   }
