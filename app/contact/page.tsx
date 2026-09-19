@@ -14,7 +14,7 @@ export default function ContactPage() {
       <PageBand
         kicker="THE LINE"
         title="CONTACT"
-        copy="Artist details stay blank until he drops them. Management is the other line."
+        copy="Artist name is on the card. Email and phone stay blank until he drops them. Management is the other line."
       />
       <div className="mx-auto max-w-5xl space-y-10 px-4 py-12 sm:px-6">
         <div className="grid gap-4 md:grid-cols-2">

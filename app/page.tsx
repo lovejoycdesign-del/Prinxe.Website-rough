@@ -173,7 +173,7 @@ export default function HomePage() {
             <div className="space-y-5 text-sm">
               <div>
                 <p className="text-[11px] tracking-[0.18em] text-brand">ARTIST</p>
-                <p className="mt-1 text-white/35">Name —</p>
+                <p className="mt-1 font-medium">{contacts.artist.name || "Name —"}</p>
                 <p className="text-white/35">Email —</p>
                 <p className="text-white/35">Phone —</p>
               </div>

@@ -375,7 +375,7 @@ export const merch: MerchItem[] = [
 
 export const contacts = {
   artist: {
-    name: "",
+    name: "Daprinxe",
     role: "Artist",
     email: "",
     phone: "",
