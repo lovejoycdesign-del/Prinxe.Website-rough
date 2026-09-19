@@ -3,6 +3,8 @@ import { PageBand } from "@/components/page-band"
 import { PayDesk, type PayTab } from "@/components/pay-desk"
 import { getBagItems } from "@/lib/bag-cookie"
 
+export const dynamic = "force-dynamic"
+
 export const metadata: Metadata = {
   title: "Payment",
   description:

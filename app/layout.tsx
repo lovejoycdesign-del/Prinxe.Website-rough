@@ -23,6 +23,8 @@ const allura = Allura({
   variable: "--font-script-face",
 })
 
+export const dynamic = "force-dynamic"
+
 export const metadata: Metadata = {
   title: {
     default: "DA PRINXE — Pain Made Me. Loyalty Keeps Me.",

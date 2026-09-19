@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
   const items = applyBagSelection(current, slug, option, size)
   const res = new NextResponse(null, {
     status: 303,
-    headers: { Location: items ? "/bag" : "/merch" },
+    headers: { Location: items ? "/bag?added=1" : "/merch" },
   })
   if (items) {
     res.cookies.set(BAG_COOKIE, JSON.stringify(items), bagCookieOptions)

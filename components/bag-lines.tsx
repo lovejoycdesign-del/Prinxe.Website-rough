@@ -1,5 +1,6 @@
 import { money } from "@/lib/data"
 import { cartLineKey, type CartLine } from "@/lib/cart-line"
+import { NativePostForm } from "@/components/native-post-form"
 
 export function BagLines({
   items,
@@ -39,7 +40,7 @@ export function BagLines({
                 </p>
               </div>
               <div className="mt-3 flex flex-wrap items-center gap-2">
-                <form action="/bag/update" method="post">
+                <NativePostForm action="/bag/update">
                   <input type="hidden" name="key" value={key} />
                   <input type="hidden" name="qty" value={line.qty - 1} />
                   <input type="hidden" name="next" value={returnTo} />
@@ -50,9 +51,9 @@ export function BagLines({
                   >
                     −
                   </button>
-                </form>
+                </NativePostForm>
                 <span className="w-8 text-center text-sm">{line.qty}</span>
-                <form action="/bag/update" method="post">
+                <NativePostForm action="/bag/update">
                   <input type="hidden" name="key" value={key} />
                   <input type="hidden" name="qty" value={line.qty + 1} />
                   <input type="hidden" name="next" value={returnTo} />
@@ -63,8 +64,8 @@ export function BagLines({
                   >
                     +
                   </button>
-                </form>
-                <form action="/bag/update" method="post">
+                </NativePostForm>
+                <NativePostForm action="/bag/update">
                   <input type="hidden" name="key" value={key} />
                   <input type="hidden" name="qty" value="0" />
                   <input type="hidden" name="next" value={returnTo} />
@@ -74,7 +75,7 @@ export function BagLines({
                   >
                     REMOVE
                   </button>
-                </form>
+                </NativePostForm>
               </div>
             </div>
           </li>

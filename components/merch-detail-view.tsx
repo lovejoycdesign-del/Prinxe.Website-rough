@@ -1,5 +1,6 @@
 import { money, type MerchItem } from "@/lib/data"
 import { AddToCartFields } from "@/components/add-to-cart"
+import { NativePostForm } from "@/components/native-post-form"
 import {
   BUY_FORM_ID,
   MerchOptionNames,
@@ -40,10 +41,9 @@ export function MerchDetailView({ item }: { item: MerchItem }) {
 
   if (!options.length) {
     return (
-      <form
+      <NativePostForm
         id={BUY_FORM_ID}
         action="/bag/add"
-        method="post"
         className="mx-auto grid max-w-5xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-2"
       >
         <div className="relative aspect-[4/3] overflow-hidden bg-black ring-1 ring-white/10">
@@ -54,15 +54,14 @@ export function MerchDetailView({ item }: { item: MerchItem }) {
           />
         </div>
         {info}
-      </form>
+      </NativePostForm>
     )
   }
 
   return (
-    <form
+    <NativePostForm
       id={BUY_FORM_ID}
       action="/bag/add"
-      method="post"
       className="merch-switch mx-auto grid max-w-5xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-2"
     >
       <MerchRadios name="option" options={options} />
@@ -72,6 +71,6 @@ export function MerchDetailView({ item }: { item: MerchItem }) {
         className="aspect-[4/3] bg-black ring-1 ring-white/10"
       />
       {info}
-    </form>
+    </NativePostForm>
   )
 }

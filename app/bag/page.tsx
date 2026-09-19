@@ -3,6 +3,8 @@ import { PageBand } from "@/components/page-band"
 import { BagView } from "@/components/bag-view"
 import { getBagItems } from "@/lib/bag-cookie"
 
+export const dynamic = "force-dynamic"
+
 export const metadata: Metadata = {
   title: "Bag",
   description: "Pieces in your DA PRINXE bag. Change quantities, then checkout.",

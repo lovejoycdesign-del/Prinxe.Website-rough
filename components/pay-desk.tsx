@@ -3,6 +3,7 @@ import { bookingOffers, cashApp, money } from "@/lib/data"
 import { bagCount, bagTotal } from "@/lib/bag-cookie"
 import type { CartLine } from "@/lib/cart-line"
 import { BagEmpty, BagLines } from "@/components/bag-lines"
+import { NativePostForm } from "@/components/native-post-form"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
@@ -186,7 +187,7 @@ function TipCheckout({
         </a>
         . Every tip is a thank-you, not a transaction with strings.
       </p>
-      <form action="/pay/charge" method="post" className="pay-form mt-4 space-y-3">
+      <NativePostForm action="/pay/charge" className="pay-form mt-4 space-y-3">
         <input type="hidden" name="kind" value="tip" />
         <div className="flex flex-wrap gap-2">
           {tips.map((n) => (
@@ -214,7 +215,7 @@ function TipCheckout({
             </span>
           ))}
         </button>
-      </form>
+      </NativePostForm>
     </div>
   )
 }
@@ -231,7 +232,7 @@ function DepositCheckout({
   }
   return (
     <div className="panel p-5">
-      <form action="/pay/charge" method="post" className="pay-form space-y-3">
+      <NativePostForm action="/pay/charge" className="pay-form space-y-3">
         <input type="hidden" name="kind" value="book" />
         <div className="grid gap-2">
           {bookingOffers.map((o, index) => (
@@ -266,7 +267,7 @@ function DepositCheckout({
             </span>
           ))}
         </button>
-      </form>
+      </NativePostForm>
     </div>
   )
 }
@@ -302,7 +303,7 @@ function CheckoutForm({
 }) {
   const pretty = money(Math.max(amount, 0))
   return (
-    <form action="/pay/charge" method="post" className="mt-6 space-y-3">
+    <NativePostForm action="/pay/charge" className="mt-6 space-y-3">
       <input type="hidden" name="kind" value={kind} />
       <input type="hidden" name="amount" value={amount} />
       <CardFields kind={kind} error={error} />
@@ -312,7 +313,7 @@ function CheckoutForm({
       >
         {`${label.toUpperCase()} · ${pretty}`}
       </button>
-    </form>
+    </NativePostForm>
   )
 }
 

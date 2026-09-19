@@ -1,4 +1,5 @@
 import { money, type MerchItem } from "@/lib/data"
+import { NativePostForm } from "@/components/native-post-form"
 import { BUY_FORM_ID, MerchSizeNames } from "@/components/merch-switch"
 
 export function AddToCartFields({ item }: { item: MerchItem }) {
@@ -14,7 +15,9 @@ export function AddToCartFields({ item }: { item: MerchItem }) {
       />
       <button
         type="submit"
-        className="inline-flex h-12 w-full items-center justify-center bg-brand text-[12px] tracking-[0.2em] text-white hover:bg-brand/85"
+        formAction="/bag/add"
+        formMethod="post"
+        className="relative z-30 inline-flex h-12 w-full items-center justify-center bg-brand text-[12px] tracking-[0.2em] text-white hover:bg-brand/85"
       >
         ADD TO BAG · {money(item.price)}
       </button>
@@ -30,8 +33,8 @@ export function AddToCartFields({ item }: { item: MerchItem }) {
 
 export function AddToCart({ item }: { item: MerchItem }) {
   return (
-    <form id={BUY_FORM_ID} action="/bag/add" method="post" className="space-y-4">
+    <NativePostForm id={BUY_FORM_ID} action="/bag/add" className="space-y-4">
       <AddToCartFields item={item} />
-    </form>
+    </NativePostForm>
   )
 }
