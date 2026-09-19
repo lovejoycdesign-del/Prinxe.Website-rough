@@ -384,7 +384,7 @@ export const contacts = {
     location: "DMV",
   } satisfies ContactCard,
   manager: {
-    name: "Chirombo Inc.",
+    name: "LJ Chirombo",
     role: "Manager",
     email: "lovejoyc.design@gmail.com",
     phone: "410-699-7677",
