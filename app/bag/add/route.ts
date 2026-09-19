@@ -1,16 +1,18 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import {
   BAG_COOKIE,
-  bagAfterSelection,
+  applyBagSelection,
   bagCookieOptions,
+  parseBagCookie,
 } from "@/lib/bag-cookie"
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   const formData = await request.formData()
   const slug = String(formData.get("slug") ?? "")
   const option = String(formData.get("option") ?? "") || null
   const size = String(formData.get("size") ?? "") || null
-  const items = await bagAfterSelection(slug, option, size)
+  const current = parseBagCookie(request.cookies.get(BAG_COOKIE)?.value)
+  const items = applyBagSelection(current, slug, option, size)
   const res = new NextResponse(null, {
     status: 303,
     headers: { Location: items ? "/bag" : "/merch" },

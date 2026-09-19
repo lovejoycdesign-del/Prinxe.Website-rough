@@ -1,8 +1,13 @@
 import { money } from "@/lib/data"
 import { cartLineKey, type CartLine } from "@/lib/cart-line"
-import { removeBagItem, setBagQty } from "@/app/bag/actions"
 
-export function BagLines({ items }: { items: CartLine[] }) {
+export function BagLines({
+  items,
+  returnTo = "/bag",
+}: {
+  items: CartLine[]
+  returnTo?: "/bag" | "/pay"
+}) {
   return (
     <ul className="divide-y divide-white/10">
       {items.map((line) => {
@@ -34,9 +39,10 @@ export function BagLines({ items }: { items: CartLine[] }) {
                 </p>
               </div>
               <div className="mt-3 flex flex-wrap items-center gap-2">
-                <form action={setBagQty}>
+                <form action="/bag/update" method="post">
                   <input type="hidden" name="key" value={key} />
                   <input type="hidden" name="qty" value={line.qty - 1} />
+                  <input type="hidden" name="next" value={returnTo} />
                   <button
                     type="submit"
                     className="grid size-9 place-items-center border border-white/20 text-lg leading-none"
@@ -46,9 +52,10 @@ export function BagLines({ items }: { items: CartLine[] }) {
                   </button>
                 </form>
                 <span className="w-8 text-center text-sm">{line.qty}</span>
-                <form action={setBagQty}>
+                <form action="/bag/update" method="post">
                   <input type="hidden" name="key" value={key} />
                   <input type="hidden" name="qty" value={line.qty + 1} />
+                  <input type="hidden" name="next" value={returnTo} />
                   <button
                     type="submit"
                     className="grid size-9 place-items-center border border-white/20 text-lg leading-none"
@@ -57,11 +64,13 @@ export function BagLines({ items }: { items: CartLine[] }) {
                     +
                   </button>
                 </form>
-                <form action={removeBagItem}>
+                <form action="/bag/update" method="post">
                   <input type="hidden" name="key" value={key} />
+                  <input type="hidden" name="qty" value="0" />
+                  <input type="hidden" name="next" value={returnTo} />
                   <button
                     type="submit"
-                    className="ml-1 min-h-9 px-2 text-[10px] tracking-[0.14em] text-white/45 hover:text-white"
+                    className="ml-1 inline-flex min-h-9 items-center border border-white/20 px-3 text-[10px] tracking-[0.14em] text-white/70 hover:border-white hover:text-white"
                   >
                     REMOVE
                   </button>

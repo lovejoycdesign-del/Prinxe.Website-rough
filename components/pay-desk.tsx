@@ -2,7 +2,6 @@ import Image from "next/image"
 import { bookingOffers, cashApp, money } from "@/lib/data"
 import { bagCount, bagTotal } from "@/lib/bag-cookie"
 import type { CartLine } from "@/lib/cart-line"
-import { demoPay } from "@/app/bag/actions"
 import { BagEmpty, BagLines } from "@/components/bag-lines"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -149,7 +148,7 @@ function BagCheckout({
   }
   return (
     <div className="panel p-5">
-      <BagLines items={items} />
+      <BagLines items={items} returnTo="/pay" />
       <p className="mt-6 text-right font-display text-3xl tracking-wide">
         {money(bagTotal(items))}
       </p>
@@ -187,7 +186,7 @@ function TipCheckout({
         </a>
         . Every tip is a thank-you, not a transaction with strings.
       </p>
-      <form action={demoPay} className="pay-form mt-4 space-y-3">
+      <form action="/pay/charge" method="post" className="pay-form mt-4 space-y-3">
         <input type="hidden" name="kind" value="tip" />
         <div className="flex flex-wrap gap-2">
           {tips.map((n) => (
@@ -232,7 +231,7 @@ function DepositCheckout({
   }
   return (
     <div className="panel p-5">
-      <form action={demoPay} className="pay-form space-y-3">
+      <form action="/pay/charge" method="post" className="pay-form space-y-3">
         <input type="hidden" name="kind" value="book" />
         <div className="grid gap-2">
           {bookingOffers.map((o, index) => (
@@ -303,7 +302,7 @@ function CheckoutForm({
 }) {
   const pretty = money(Math.max(amount, 0))
   return (
-    <form action={demoPay} className="mt-6 space-y-3">
+    <form action="/pay/charge" method="post" className="mt-6 space-y-3">
       <input type="hidden" name="kind" value={kind} />
       <input type="hidden" name="amount" value={amount} />
       <CardFields kind={kind} error={error} />

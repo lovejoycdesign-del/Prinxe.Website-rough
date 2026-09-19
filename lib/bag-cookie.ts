@@ -43,11 +43,14 @@ function readBag(raw: string): CartLine[] {
   return []
 }
 
-export async function getBagItems(): Promise<CartLine[]> {
-  const store = await cookies()
-  const raw = store.get(BAG_COOKIE)?.value
+export function parseBagCookie(raw?: string | null): CartLine[] {
   if (!raw) return []
   return readBag(raw)
+}
+
+export async function getBagItems(): Promise<CartLine[]> {
+  const store = await cookies()
+  return parseBagCookie(store.get(BAG_COOKIE)?.value)
 }
 
 export async function setBagItems(items: CartLine[]) {
@@ -62,14 +65,14 @@ export const bagCookieOptions = {
   httpOnly: true,
 }
 
-export async function bagAfterSelection(
+export function applyBagSelection(
+  items: CartLine[],
   slug: string,
   optionId?: string | null,
   size?: string | null
 ) {
   const line = merchSelectionToLine(slug, optionId, size)
   if (!line) return null
-  const items = await getBagItems()
   const key = cartLineKey(line)
   const index = items.findIndex((item) => cartLineKey(item) === key)
   return index >= 0
@@ -77,6 +80,14 @@ export async function bagAfterSelection(
         i === index ? { ...item, qty: item.qty + 1 } : item
       )
     : [...items, { ...line, qty: 1 }]
+}
+
+export async function bagAfterSelection(
+  slug: string,
+  optionId?: string | null,
+  size?: string | null
+) {
+  return applyBagSelection(await getBagItems(), slug, optionId, size)
 }
 
 export async function addBagSelection(
