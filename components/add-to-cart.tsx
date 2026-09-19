@@ -1,5 +1,4 @@
 import { money, type MerchItem } from "@/lib/data"
-import { addToBag } from "@/app/bag/actions"
 import { BUY_FORM_ID, MerchSizeNames } from "@/components/merch-switch"
 
 export function AddToCartFields({ item }: { item: MerchItem }) {
@@ -31,7 +30,7 @@ export function AddToCartFields({ item }: { item: MerchItem }) {
 
 export function AddToCart({ item }: { item: MerchItem }) {
   return (
-    <form id={BUY_FORM_ID} action={addToBag} className="space-y-4">
+    <form id={BUY_FORM_ID} action="/bag/add" method="post" className="space-y-4">
       <AddToCartFields item={item} />
     </form>
   )

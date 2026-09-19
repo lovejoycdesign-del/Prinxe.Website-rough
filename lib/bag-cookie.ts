@@ -20,27 +20,63 @@ function isLine(value: unknown): value is CartLine {
   )
 }
 
+function readBag(raw: string): CartLine[] {
+  const attempts = [raw]
+  try {
+    attempts.push(decodeURIComponent(raw))
+  } catch {
+    /* already plain */
+  }
+  try {
+    attempts.push(decodeURIComponent(decodeURIComponent(raw)))
+  } catch {
+    /* not double-encoded */
+  }
+  for (const value of attempts) {
+    try {
+      const parsed = JSON.parse(value) as unknown
+      if (Array.isArray(parsed)) return parsed.filter(isLine)
+    } catch {
+      /* try next */
+    }
+  }
+  return []
+}
+
 export async function getBagItems(): Promise<CartLine[]> {
   const store = await cookies()
   const raw = store.get(BAG_COOKIE)?.value
   if (!raw) return []
-  try {
-    const parsed = JSON.parse(decodeURIComponent(raw)) as unknown
-    if (!Array.isArray(parsed)) return []
-    return parsed.filter(isLine)
-  } catch {
-    return []
-  }
+  return readBag(raw)
 }
 
 export async function setBagItems(items: CartLine[]) {
   const store = await cookies()
-  store.set(BAG_COOKIE, encodeURIComponent(JSON.stringify(items)), {
-    path: "/",
-    maxAge: 60 * 60 * 24 * 30,
-    sameSite: "lax",
-    httpOnly: true,
-  })
+  store.set(BAG_COOKIE, JSON.stringify(items), bagCookieOptions)
+}
+
+export const bagCookieOptions = {
+  path: "/",
+  maxAge: 60 * 60 * 24 * 30,
+  sameSite: "lax" as const,
+  httpOnly: true,
+}
+
+export async function bagAfterSelection(
+  slug: string,
+  optionId?: string | null,
+  size?: string | null
+) {
+  const line = merchSelectionToLine(slug, optionId, size)
+  if (!line) return null
+  const items = await getBagItems()
+  const key = cartLineKey(line)
+  const index = items.findIndex((item) => cartLineKey(item) === key)
+  return index >= 0
+    ? items.map((item, i) =>
+        i === index ? { ...item, qty: item.qty + 1 } : item
+      )
+    : [...items, { ...line, qty: 1 }]
 }
 
 export async function addBagSelection(
@@ -48,17 +84,8 @@ export async function addBagSelection(
   optionId?: string | null,
   size?: string | null
 ) {
-  const line = merchSelectionToLine(slug, optionId, size)
-  if (!line) return false
-  const items = await getBagItems()
-  const key = cartLineKey(line)
-  const index = items.findIndex((item) => cartLineKey(item) === key)
-  const next =
-    index >= 0
-      ? items.map((item, i) =>
-          i === index ? { ...item, qty: item.qty + 1 } : item
-        )
-      : [...items, { ...line, qty: 1 }]
+  const next = await bagAfterSelection(slug, optionId, size)
+  if (!next) return false
   await setBagItems(next)
   return true
 }
