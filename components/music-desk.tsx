@@ -123,8 +123,8 @@ export function MusicDesk() {
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <p className="max-w-lg text-sm text-white/55">
-          Empty play buttons mean the URL is still missing. Use Add links on
-          any row.
+          Apple Music buttons open the official Daprinxe record. Empty rows
+          still need a URL — use Add links if another platform goes live.
         </p>
         <Button
           onClick={() => setAdding(true)}

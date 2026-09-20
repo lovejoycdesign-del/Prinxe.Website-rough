@@ -2,7 +2,15 @@ import type { ReactNode } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Play } from "lucide-react"
-import { artist, contacts, merch, platforms, songs, videos } from "@/lib/data"
+import {
+  appleMusic,
+  artist,
+  contacts,
+  merch,
+  platforms,
+  songs,
+  videos,
+} from "@/lib/data"
 import { platformIcons } from "@/components/icons"
 import { Waveform } from "@/components/waveform"
 
@@ -62,11 +70,26 @@ export default function HomePage() {
               <div className="mt-3 flex flex-wrap items-center gap-4 text-white/70">
                 {platforms.map((p) => {
                   const Icon = platformIcons[p.key]
+                  const href = p.key === "apple" ? appleMusic.url : undefined
+                  const className =
+                    "inline-flex items-center gap-1.5 text-[11px] tracking-[0.12em]"
+                  if (href) {
+                    return (
+                      <a
+                        key={p.key}
+                        href={href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={`${className} hover:text-white`}
+                        aria-label="Apple Music artist page"
+                      >
+                        <Icon className="size-4" />
+                        <span className="hidden sm:inline">{p.label}</span>
+                      </a>
+                    )
+                  }
                   return (
-                    <span
-                      key={p.key}
-                      className="inline-flex items-center gap-1.5 text-[11px] tracking-[0.12em]"
-                    >
+                    <span key={p.key} className={className}>
                       <Icon className="size-4" />
                       <span className="hidden sm:inline">{p.label}</span>
                     </span>

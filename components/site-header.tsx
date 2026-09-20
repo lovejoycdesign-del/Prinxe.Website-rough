@@ -45,7 +45,7 @@ export function SiteHeader({ bagCount = 0 }: { bagCount?: number }) {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <div className="hidden items-center gap-2 md:flex">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             {artist.socials.map((social) => {
               const Icon = socialIcons[social.key as keyof typeof socialIcons]
               return (
