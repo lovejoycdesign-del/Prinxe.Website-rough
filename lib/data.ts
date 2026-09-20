@@ -276,25 +276,8 @@ export const merch: MerchItem[] = [
     image: "/images/merch-sweatsuit-drop.png",
     tag: "THE SUIT",
     description:
-      "Hoodie and sweatpants together in black, grey, or white. Built Different circle up front, BD Clothing globe on the back. One bag, one look.",
+      "Hoodie and sweatpants together in black. Built Different circle up front, BD Clothing globe on the back. One bag, one look.",
     sizes: ["S", "M", "L", "XL", "2XL"],
-    colors: [
-      {
-        id: "black",
-        label: "BLACK",
-        image: "/images/merch-sweatsuit-drop.png",
-      },
-      {
-        id: "grey",
-        label: "GREY",
-        image: "/images/merch-sweatsuit-grey-drop.png",
-      },
-      {
-        id: "white",
-        label: "WHITE",
-        image: "/images/merch-sweatsuit-white-drop.png",
-      },
-    ],
   },
   {
     slug: "stencil-tee",
@@ -303,25 +286,8 @@ export const merch: MerchItem[] = [
     image: "/images/merch-tee.jpg",
     tag: "ESSENTIAL",
     description:
-      "Work shirt in black, grey, or white. Quiet mark on the chest, Built Different globe print on the back. More than clothes.",
+      "Work shirt in black. Quiet mark on the chest, Built Different globe print on the back. More than clothes.",
     sizes: ["S", "M", "L", "XL", "2XL"],
-    colors: [
-      {
-        id: "black",
-        label: "BLACK",
-        image: "/images/merch-tee.jpg",
-      },
-      {
-        id: "grey",
-        label: "GREY",
-        image: "/images/merch-tee-grey-drop.png",
-      },
-      {
-        id: "white",
-        label: "WHITE",
-        image: "/images/merch-tee-white-drop.png",
-      },
-    ],
   },
   {
     slug: "real-ones-shorts",
